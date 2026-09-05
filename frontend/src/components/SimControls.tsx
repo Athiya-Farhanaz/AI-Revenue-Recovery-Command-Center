@@ -90,18 +90,18 @@ export const SimControls: React.FC<SimControlsProps> = ({
         </div>
 
         {/* Center: Live Digital Simulation Clock */}
-        <div className="flex items-center gap-2 bg-brand-dark px-3 py-1.5 rounded-lg border border-brand-border">
-          <Clock size={14} className="text-slate-400 dark:text-slate-400" />
+        <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800">
+          <Clock size={14} className="text-slate-500 dark:text-slate-400" />
           <div className="flex flex-col">
             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">Simulated Virtual Time</span>
-            <span className="text-xs text-slate-800 dark:text-slate-100 font-mono font-semibold tracking-tight">{formattedTime()}</span>
+            <span className="text-xs text-slate-900 dark:text-slate-100 font-mono font-bold tracking-tight">{formattedTime()}</span>
           </div>
           {isSalaryWindow() ? (
             <span className="ml-2 bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 text-[10px] font-semibold px-2 py-0.5 rounded-full">
               💼 Salary Window: 65% Mandate Recovery
             </span>
           ) : (
-            <span className="ml-2 bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
+            <span className="ml-2 bg-slate-200 text-slate-700 border border-slate-300 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
               Standard Cycle
             </span>
           )}
@@ -133,7 +133,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
           </button>
 
           {/* Speed Selector */}
-          <div className="flex bg-brand-dark p-0.5 rounded-lg border border-brand-border text-xs font-medium" title="Simulation Speed: controls how fast virtual time advances in auto-stream">
+          <div className="flex bg-slate-100 dark:bg-slate-900 p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-medium" title="Simulation Speed: controls how fast virtual time advances in auto-stream">
             {[1, 2, 5].map((speed) => (
               <button
                 key={speed}
@@ -141,7 +141,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
                 className={`px-2 py-1 rounded transition-all cursor-pointer ${
                   streamSpeed === speed 
                     ? 'bg-[#0066FF] text-white font-semibold shadow-sm' 
-                    : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                 }`}
                 title={`${speed}x Simulation Pace (${speed * 5}s virtual time advanced per tick)`}
               >
@@ -155,7 +155,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
             <select
               value={tickSeconds}
               onChange={(e) => setTickSeconds(Number(e.target.value))}
-              className="bg-brand-dark border border-brand-border text-slate-700 dark:text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px] cursor-pointer"
+              className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px] cursor-pointer"
               title="Select virtual time duration to advance"
             >
               <option value={5}>+5s</option>
@@ -165,7 +165,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
             </select>
             <button
               onClick={() => onTick(tickSeconds)}
-              className="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-y border-r border-brand-border px-2.5 py-1.5 rounded-r-lg text-xs font-medium flex items-center h-[31px] cursor-pointer transition-all"
+              className="bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border-y border-r border-slate-200 dark:border-slate-700 px-2.5 py-1.5 rounded-r-lg text-xs font-medium flex items-center h-[31px] cursor-pointer transition-all"
               title="Advance virtual clock forward by selected seconds to trigger due dunning actions"
             >
               <FastForward size={13} className="mr-1" />
@@ -190,7 +190,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
       {/* Quick Webhook Event Injector Strip: Clean Enterprise Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-semibold text-xs">
+        <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 font-semibold text-xs">
           <Zap size={14} className="text-[#0066FF]" />
           <span>Quick Ingest Webhook:</span>
         </div>
@@ -198,7 +198,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => onInject('payment', 1)}
-            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Ingest UPI PIN failure -> Dispatches WhatsApp Hinglish Recovery"
           >
             <CreditCard size={13} className="text-blue-500" />
@@ -207,7 +207,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('checkout', 1)}
-            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Ingest checkout abandonment -> Dispatches Margin-Aware Discount Voucher"
           >
             <ShoppingBag size={13} className="text-emerald-500" />
@@ -216,7 +216,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('subscription', 1)}
-            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Ingest recurring mandate decline -> Dispatches Mandate Retry Sequencer"
           >
             <Layers size={13} className="text-indigo-500" />
@@ -225,7 +225,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('invoice', 1)}
-            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Ingest overdue B2B invoice -> Dispatches 3-Tier Tone Escalation"
           >
             <FileText size={13} className="text-amber-500" />
@@ -234,7 +234,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('payment', 5)}
-            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Simulate sudden traffic spike: Ingest 5 mixed failure webhooks"
           >
             <ShieldAlert size={13} className="text-red-500" />
@@ -243,7 +243,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('mixed', 10)}
-            className="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-[#0066FF] border border-blue-200 dark:bg-blue-950/40 dark:hover:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-[#0066FF] border border-blue-200 dark:bg-blue-950/40 dark:hover:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Inject batch of 10 mixed failure events"
           >
             <Zap size={13} className="text-[#0066FF] dark:text-blue-400" />

@@ -134,24 +134,24 @@ export const CaseList: React.FC<CaseListProps> = ({
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 min-h-[520px]">
       
       {/* LEFT COLUMN: Cases feed */}
-      <div className="bg-brand-surface border border-brand-border rounded-xl p-4 lg:col-span-5 flex flex-col space-y-3.5 shadow-lg h-[680px] overflow-hidden">
+      <div className="bg-brand-surface border border-brand-border rounded-xl p-4 lg:col-span-5 flex flex-col space-y-3.5 shadow-sm h-[680px] overflow-hidden">
         <div>
           <div className="flex justify-between items-center mb-2">
-            <h4 className="text-sm font-bold text-white">Live Revenue Ingestion Stream</h4>
-            <span className="text-[10px] bg-slate-900 border border-brand-border text-gray-400 px-2 py-0.5 rounded font-mono">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Live Revenue Ingestion Stream</h4>
+            <span className="text-[10px] bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-brand-border text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded font-mono font-medium">
               {filteredCases.length} Cases
             </span>
           </div>
           
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 text-gray-500" size={14} />
+            <Search className="absolute left-2.5 top-2.5 text-slate-400" size={14} />
             <input
               type="text"
               placeholder="Search by customer, case ID, failure..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-brand-dark border border-brand-border rounded-lg pl-9 pr-4 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-brand-primary"
+              className="w-full bg-slate-50 dark:bg-brand-dark border border-slate-200 dark:border-brand-border rounded-lg pl-9 pr-4 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
           </div>
 
@@ -160,7 +160,7 @@ export const CaseList: React.FC<CaseListProps> = ({
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-brand-dark border border-brand-border text-gray-300 text-[10px] font-bold rounded p-1.5 focus:outline-none"
+              className="bg-slate-50 dark:bg-brand-dark border border-slate-200 dark:border-brand-border text-slate-700 dark:text-slate-300 text-[10px] font-bold rounded p-1.5 focus:outline-none cursor-pointer"
             >
               <option value="all">Status: All</option>
               <option value="pending">Pending</option>
@@ -171,7 +171,7 @@ export const CaseList: React.FC<CaseListProps> = ({
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="bg-brand-dark border border-brand-border text-gray-300 text-[10px] font-bold rounded p-1.5 focus:outline-none"
+              className="bg-slate-50 dark:bg-brand-dark border border-slate-200 dark:border-brand-border text-slate-700 dark:text-slate-300 text-[10px] font-bold rounded p-1.5 focus:outline-none cursor-pointer"
             >
               <option value="all">Type: All</option>
               <option value="payment">Payment</option>
@@ -263,8 +263,8 @@ export const CaseList: React.FC<CaseListProps> = ({
               {/* Audit trail */}
               <div className="md:col-span-7 flex flex-col h-full overflow-hidden pr-2">
                 <div className="mb-2">
-                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block">AI Risk Assessment</span>
-                  <div className="w-full bg-slate-800 rounded-full h-1.5 mt-1 overflow-hidden">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block">AI Risk Assessment</span>
+                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1 overflow-hidden">
                     <div 
                       className={`h-1.5 rounded-full ${
                         caseDetail.risk_score > 0.7 
@@ -278,7 +278,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                   </div>
                 </div>
 
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-2 block">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-2 block">
                   Audit & Dunning Trail ({caseDetail.audit_logs.length} events)
                 </span>
 
@@ -293,29 +293,29 @@ export const CaseList: React.FC<CaseListProps> = ({
                         key={log.id} 
                         className={`p-2.5 rounded-lg border text-[11px] relative pl-3.5 transition-all ${
                           isSuccess 
-                            ? 'bg-emerald-950/20 border-emerald-900/40 text-emerald-300' 
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900/40 dark:text-emerald-300' 
                             : isFailure 
-                              ? 'bg-red-950/20 border-red-900/40 text-red-300' 
-                              : 'bg-brand-dark/70 border-brand-border/60 text-slate-300'
+                              ? 'bg-red-50 text-red-800 border-red-200 dark:bg-red-950/20 dark:border-red-900/40 dark:text-red-300' 
+                              : 'bg-slate-50 text-slate-800 border-slate-200 dark:bg-brand-dark/70 dark:border-brand-border/60 dark:text-slate-300'
                         }`}
                       >
                         <span className={`absolute left-1.5 top-3 w-1.5 h-1.5 rounded-full ${
                           isSuccess 
-                            ? 'bg-emerald-400' 
+                            ? 'bg-emerald-500' 
                             : isFailure 
                               ? 'bg-red-500' 
                               : isIntervention 
                                 ? 'bg-blue-500' 
-                                : 'bg-slate-500'
+                                : 'bg-slate-400'
                         }`} />
 
-                        <div className="flex justify-between text-[10px] text-gray-400 font-semibold mb-0.5">
+                        <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-semibold mb-0.5">
                           <span className="uppercase font-bold">{log.action}</span>
                           <span>{new Date(log.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
                         </div>
                         <p className="leading-relaxed font-medium">{log.message}</p>
                         {log.agent_reasoning && (
-                          <div className="mt-1 bg-brand-dark/60 border-l-2 border-brand-primary p-1.5 rounded text-[10px] text-gray-400 leading-snug">
+                          <div className="mt-1 bg-white dark:bg-brand-dark/60 border-l-2 border-brand-primary p-1.5 rounded text-[10px] text-slate-600 dark:text-slate-400 leading-snug">
                             {log.agent_reasoning}
                           </div>
                         )}
@@ -330,11 +330,11 @@ export const CaseList: React.FC<CaseListProps> = ({
                 
                 {/* Visualizer header tabs */}
                 <div className="flex items-center justify-between mb-2">
-                  <div className="flex bg-slate-900 rounded-lg p-0.5 border border-brand-border text-[10px] font-bold">
+                  <div className="flex bg-slate-100 dark:bg-slate-900 rounded-lg p-0.5 border border-slate-200 dark:border-brand-border text-[10px] font-bold">
                     <button
                       onClick={() => setPreviewMode('whatsapp')}
-                      className={`px-2 py-1 rounded flex items-center gap-1 transition-all ${
-                        previewMode === 'whatsapp' ? 'bg-brand-primary text-white shadow' : 'text-gray-400 hover:text-white'
+                      className={`px-2 py-1 rounded flex items-center gap-1 transition-all cursor-pointer ${
+                        previewMode === 'whatsapp' ? 'bg-[#0066FF] text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Smartphone size={11} />
@@ -342,21 +342,21 @@ export const CaseList: React.FC<CaseListProps> = ({
                     </button>
                     <button
                       onClick={() => setPreviewMode('voice')}
-                      className={`px-2 py-1 rounded flex items-center gap-1 transition-all ${
-                        previewMode === 'voice' ? 'bg-emerald-600 text-white shadow' : 'text-gray-400 hover:text-white'
+                      className={`px-2 py-1 rounded flex items-center gap-1 transition-all cursor-pointer ${
+                        previewMode === 'voice' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Volume2 size={11} />
                       AI Voice
                     </button>
                   </div>
-                  <span className="text-[9px] text-emerald-400 font-bold uppercase">Dynamic Copy</span>
+                  <span className="text-[9px] text-emerald-600 dark:text-emerald-400 font-bold uppercase">Dynamic Copy</span>
                 </div>
 
                 {/* Main Simulator View */}
                 {previewMode === 'whatsapp' ? (
                   /* WhatsApp Phone UI */
-                  <div className="flex-grow bg-[#0b141a] rounded-2xl border border-slate-800 p-2 overflow-hidden flex flex-col max-h-[350px] shadow-inner relative">
+                  <div className="whatsapp-phone-mock flex-grow bg-[#0b141a] rounded-2xl border border-slate-800 p-2 overflow-hidden flex flex-col max-h-[350px] shadow-inner relative">
                     <div className="bg-[#1f2c34] rounded-t-xl px-2 py-1.5 flex items-center justify-between text-white text-[10px] font-bold">
                       <div className="flex items-center gap-1.5">
                         <span className="w-5 h-5 bg-emerald-600 rounded-full flex items-center justify-center font-sans font-bold text-[9px]">R</span>
@@ -400,7 +400,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                   </div>
                 ) : (
                   /* Interactive AI Hinglish Voice Recovery Screen */
-                  <div className="flex-grow bg-slate-950 rounded-2xl border border-emerald-500/30 p-3 overflow-hidden flex flex-col justify-between max-h-[350px] shadow-inner relative">
+                  <div className="voice-call-mock flex-grow bg-slate-950 rounded-2xl border border-emerald-500/30 p-3 overflow-hidden flex flex-col justify-between max-h-[350px] shadow-inner relative">
                     <div className="text-center pt-2">
                       <div className="w-12 h-12 rounded-full bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 mx-auto flex items-center justify-center mb-2 animate-pulse">
                         <Volume2 size={24} />
@@ -432,7 +432,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                     <div className="pt-2 flex justify-center">
                       <button
                         onClick={handleToggleVoicePlayback}
-                        className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg transition-all ${
+                        className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg transition-all cursor-pointer ${
                           isPlayingAudio 
                             ? 'bg-red-600 hover:bg-red-500 text-white animate-pulse' 
                             : 'bg-emerald-600 hover:bg-emerald-500 text-white'
@@ -461,14 +461,14 @@ export const CaseList: React.FC<CaseListProps> = ({
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           onClick={() => onApplyOverride("recover")}
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-all"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-all cursor-pointer shadow-xs"
                         >
                           <CheckCircle size={12} /> Force Paid (MDR Logged)
                         </button>
 
                         <button
                           onClick={() => onApplyOverride("retry")}
-                          className="bg-brand-border hover:bg-slate-700 text-slate-200 text-[10px] font-bold py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 border border-slate-700 transition-all"
+                          className="bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-brand-border dark:hover:bg-slate-700 dark:text-slate-200 text-[10px] font-bold py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 border border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
                         >
                           <RefreshCcw size={12} /> Force Immediate Retry
                         </button>
@@ -477,10 +477,10 @@ export const CaseList: React.FC<CaseListProps> = ({
                       <div className="flex gap-2">
                         <button
                           onClick={() => { setShowPromiseForm(!showPromiseForm); setShowMsgForm(false); }}
-                          className={`flex-1 text-[10px] py-1 px-2 rounded font-bold border transition-all ${
+                          className={`flex-1 text-[10px] py-1 px-2 rounded font-bold border transition-all cursor-pointer ${
                             showPromiseForm 
                               ? 'bg-amber-600/20 text-brand-warning border-brand-warning' 
-                              : 'bg-brand-dark text-slate-400 border-slate-800 hover:border-slate-700'
+                              : 'bg-slate-100 dark:bg-brand-dark text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-400'
                           }`}
                         >
                           Promise-to-Pay
@@ -488,10 +488,10 @@ export const CaseList: React.FC<CaseListProps> = ({
                         
                         <button
                           onClick={() => { setShowMsgForm(!showMsgForm); setShowPromiseForm(false); }}
-                          className={`flex-1 text-[10px] py-1 px-2 rounded font-bold border transition-all ${
+                          className={`flex-1 text-[10px] py-1 px-2 rounded font-bold border transition-all cursor-pointer ${
                             showMsgForm 
                               ? 'bg-blue-600/20 text-brand-primary border-brand-primary' 
-                              : 'bg-brand-dark text-slate-400 border-slate-800 hover:border-slate-700'
+                              : 'bg-slate-100 dark:bg-brand-dark text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:border-slate-400'
                           }`}
                         >
                           Custom Message
@@ -500,14 +500,14 @@ export const CaseList: React.FC<CaseListProps> = ({
 
                       {/* Promise Form */}
                       {showPromiseForm && (
-                        <div className="bg-brand-dark p-2 rounded-lg border border-brand-border flex flex-col gap-1.5 mt-1.5 animate-fadeIn">
-                          <span className="text-[9px] text-gray-400">Promise-to-pay Date:</span>
+                        <div className="bg-slate-50 dark:bg-brand-dark p-2 rounded-lg border border-slate-200 dark:border-brand-border flex flex-col gap-1.5 mt-1.5 animate-fadeIn">
+                          <span className="text-[9px] text-slate-500 dark:text-gray-400">Promise-to-pay Date:</span>
                           <div className="flex gap-1.5">
                             <input
                               type="datetime-local"
                               value={promiseDateStr}
                               onChange={(e) => setPromiseDateStr(e.target.value)}
-                              className="bg-slate-900 border border-brand-border rounded text-[10px] p-1 text-white flex-grow focus:outline-none"
+                              className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-brand-border rounded text-[10px] p-1 text-slate-900 dark:text-white flex-grow focus:outline-none"
                             />
                             <button
                               onClick={() => {
@@ -516,7 +516,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                                   setShowPromiseForm(false);
                                 }
                               }}
-                              className="bg-brand-primary hover:bg-blue-600 text-white text-[10px] font-bold px-2 rounded"
+                              className="bg-brand-primary hover:bg-blue-600 text-white text-[10px] font-bold px-2 rounded cursor-pointer"
                             >
                               Set
                             </button>
@@ -526,15 +526,15 @@ export const CaseList: React.FC<CaseListProps> = ({
 
                       {/* Custom Msg Form */}
                       {showMsgForm && (
-                        <div className="bg-brand-dark p-2 rounded-lg border border-brand-border flex flex-col gap-1.5 mt-1.5">
-                          <span className="text-[9px] text-gray-400">Type Custom Nudge (Hinglish/English):</span>
+                        <div className="bg-slate-50 dark:bg-brand-dark p-2 rounded-lg border border-slate-200 dark:border-brand-border flex flex-col gap-1.5 mt-1.5">
+                          <span className="text-[9px] text-slate-500 dark:text-gray-400">Type Custom Nudge (Hinglish/English):</span>
                           <div className="flex gap-1.5">
                             <input
                               type="text"
                               value={customMsgStr}
                               placeholder="e.g., WhatsApp: Hi Rajesh, update card now..."
                               onChange={(e) => setCustomMsgStr(e.target.value)}
-                              className="bg-slate-900 border border-brand-border rounded text-[10px] p-1 text-white flex-grow focus:outline-none"
+                              className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-brand-border rounded text-[10px] p-1 text-slate-900 dark:text-white flex-grow focus:outline-none"
                             />
                             <button
                               onClick={() => {
@@ -543,7 +543,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                                   setShowMsgForm(false);
                                 }
                               }}
-                              className="bg-brand-primary hover:bg-blue-600 text-white text-[10px] font-bold p-1 px-2 rounded flex items-center justify-center"
+                              className="bg-brand-primary hover:bg-blue-600 text-white text-[10px] font-bold p-1 px-2 rounded flex items-center justify-center cursor-pointer"
                             >
                               <Send size={10} />
                             </button>
@@ -552,7 +552,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                       )}
                     </div>
                   ) : (
-                    <div className="bg-slate-900/60 p-2 rounded-lg border border-brand-border text-center text-xs text-gray-400 font-semibold">
+                    <div className="bg-slate-100 dark:bg-slate-900/60 p-2 rounded-lg border border-slate-200 dark:border-brand-border text-center text-xs text-slate-600 dark:text-gray-400 font-semibold">
                       This recovery workflow is closed ({caseDetail.status.toUpperCase()}).
                     </div>
                   )}
@@ -564,10 +564,10 @@ export const CaseList: React.FC<CaseListProps> = ({
 
           </div>
         ) : (
-          <div className="h-full flex flex-col items-center justify-center text-gray-500 text-xs text-center px-6">
+          <div className="h-full flex flex-col items-center justify-center text-slate-500 text-xs text-center px-6">
             <Radio className="animate-pulse mb-3 text-brand-primary/60" size={32} />
-            <h4 className="text-sm font-bold text-white mb-1">No Case Selected</h4>
-            <p className="max-w-xs text-gray-500 leading-relaxed">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1">No Case Selected</h4>
+            <p className="max-w-xs text-slate-500 leading-relaxed">
               Select an active or recovered transaction from the stream on the left to inspect the AI agent decision-making path, audit trails, and client interventions.
             </p>
           </div>

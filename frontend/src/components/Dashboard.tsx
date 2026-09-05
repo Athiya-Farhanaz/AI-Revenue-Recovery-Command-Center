@@ -119,17 +119,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <span>Gateway Stream: {isStreaming ? 'Online (Active)' : 'Standby'}</span>
             </div>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="text-slate-500 dark:text-slate-400 font-mono">TPS: <strong className="text-slate-800 dark:text-slate-200">1.4 req/s</strong></span>
+            <span className="text-slate-600 dark:text-slate-400 font-mono">TPS: <strong className="text-slate-900 dark:text-slate-100 font-bold">1.4 req/s</strong></span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="text-slate-500 dark:text-slate-400 font-mono">Agent Latency: <strong className="text-slate-800 dark:text-slate-200">18ms</strong></span>
+            <span className="text-slate-600 dark:text-slate-400 font-mono">Agent Latency: <strong className="text-slate-900 dark:text-slate-100 font-bold">18ms</strong></span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="text-slate-500 dark:text-slate-400 font-mono">Active Ingestion: <strong className="text-blue-600 dark:text-blue-400">Webhook Sink #01</strong></span>
+            <span className="text-slate-600 dark:text-slate-400 font-mono">Active Ingestion: <strong className="text-[#0066FF] dark:text-blue-400 font-semibold">Webhook Sink #01</strong></span>
           </div>
 
-          <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-xs">
-            <span>Model: <strong className="text-indigo-600 dark:text-indigo-400">gemini-flash-latest</strong></span>
+          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-mono text-xs">
+            <span>Model: <strong className="text-indigo-600 dark:text-indigo-400 font-semibold">gemini-flash-latest</strong></span>
             <span>•</span>
-            <span>MDR Rate: <strong className="text-emerald-600 dark:text-emerald-400">2.0%</strong></span>
+            <span>MDR Rate: <strong className="text-emerald-600 dark:text-emerald-400 font-semibold">2.0%</strong></span>
           </div>
         </div>
       </div>
@@ -493,7 +493,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       </div>
 
       {/* Live System Operations Terminal: Clean Developer Monospace Console */}
-      <div className="bg-[#071933] border border-[#162C4E] rounded-xl p-4 shadow-md font-mono text-slate-200">
+      <div className="terminal-console bg-[#071933] border border-[#162C4E] rounded-xl p-4 shadow-md font-mono text-slate-200">
         <div className="flex flex-wrap justify-between items-center mb-2.5 border-b border-[#162C4E] pb-2.5 gap-2">
           <div className="flex items-center space-x-2">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
@@ -515,7 +515,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   className={`px-2 py-0.5 rounded uppercase font-semibold text-[10px] tracking-wider transition-colors cursor-pointer ${
                     logFilter === f && !isLogsCleared
                       ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' 
-                      : 'text-slate-400 hover:text-slate-200'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   {f}
@@ -523,12 +523,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
               ))}
             </div>
 
-            <span className="text-gray-700">|</span>
+            <span className="text-slate-600">|</span>
 
             {/* Export CSV */}
             <button
               onClick={handleExportCSV}
-              className="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 rounded flex items-center gap-1 transition-colors"
+              className="px-2 py-0.5 bg-[#0D2240] hover:bg-[#15325C] text-slate-200 hover:text-white border border-[#1D3B64] rounded flex items-center gap-1 transition-colors cursor-pointer"
               title="Export all audit logs to CSV"
             >
               <Download size={10} className="text-blue-400" />
@@ -538,7 +538,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             {/* Clear terminal view */}
             <button
               onClick={() => setIsLogsCleared(!isLogsCleared)}
-              className="p-1 hover:bg-slate-900 text-gray-500 hover:text-red-400 rounded transition-colors"
+              className="p-1 hover:bg-slate-800 text-slate-400 hover:text-red-400 rounded transition-colors cursor-pointer"
               title="Clear terminal view"
             >
               <Trash2 size={12} />

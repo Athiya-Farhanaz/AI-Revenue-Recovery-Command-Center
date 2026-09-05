@@ -398,7 +398,7 @@ function App() {
                 Operational
               </span>
             </div>
-            <p className="text-xs text-slate-400">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
+            <p className="text-xs text-slate-300">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
           </div>
         </div>
 
@@ -417,18 +417,18 @@ function App() {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 bg-[#0D2240] hover:bg-[#15325C] text-slate-200 border border-[#1D3B64] rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="p-1.5 bg-[#0D2240] hover:bg-[#15325C] text-slate-100 hover:text-white border border-[#1D3B64] rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
             title={`Switch to Razorpay ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
           >
             {theme === 'dark' ? (
               <>
                 <Sun size={14} className="text-amber-400" />
-                <span className="hidden sm:inline text-xs text-slate-200 font-medium">Light Mode</span>
+                <span className="hidden sm:inline text-xs text-slate-100 font-medium">Light Mode</span>
               </>
             ) : (
               <>
                 <Moon size={14} className="text-[#60A5FA]" />
-                <span className="hidden sm:inline text-xs text-slate-200 font-medium">Dark Mode</span>
+                <span className="hidden sm:inline text-xs text-slate-100 font-medium">Dark Mode</span>
               </>
             )}
           </button>
@@ -440,7 +440,7 @@ function App() {
               className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'dashboard'
                   ? 'bg-[#0066FF] text-white shadow-sm text-white-forced font-semibold'
-                  : 'text-slate-300 hover:text-white'
+                  : 'text-slate-200 hover:text-white'
               }`}
             >
               <BarChart2 size={13} />
@@ -452,7 +452,7 @@ function App() {
               className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'stream'
                   ? 'bg-[#0066FF] text-white shadow-sm text-white-forced font-semibold'
-                  : 'text-slate-300 hover:text-white'
+                  : 'text-slate-200 hover:text-white'
               }`}
             >
               <Radio size={13} className={metrics.active_cases > 0 ? 'text-emerald-400' : ''} />
@@ -521,53 +521,53 @@ function App() {
       {/* Evaluation Batch Modal */}
       {showEvalModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-brand-surface border border-brand-border rounded-2xl max-w-xl w-full p-6 shadow-2xl relative space-y-4">
+          <div className="bg-white dark:bg-brand-surface border border-slate-200 dark:border-brand-border rounded-2xl max-w-xl w-full p-6 shadow-2xl relative space-y-4">
             <button
               onClick={() => setShowEvalModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-900 dark:hover:text-white"
             >
               <X size={18} />
             </button>
 
             <div className="flex items-center gap-2">
               <Sparkles size={20} className="text-brand-primary" />
-              <h3 className="text-base font-bold text-white">Full Pipeline 200-Case Evaluation</h3>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Full Pipeline 200-Case Evaluation</h3>
             </div>
 
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
               Executes a batch of 200 mixed failure scenarios (UPI timeouts, card soft-declines, cart drops, and B2B invoices) through the autonomous agent to completion, measuring total volume at risk, net recovered revenue, and itemized P&L costs.
             </p>
 
             {isEvaluating ? (
               <div className="py-8 text-center space-y-3">
                 <RefreshCw className="animate-spin text-brand-primary mx-auto" size={32} />
-                <p className="text-xs font-bold text-white">Evaluating 200 Transactions Through Agent State Machine...</p>
-                <p className="text-[10px] text-gray-500">Checking stopping rules, salary windows, and customer response curves.</p>
+                <p className="text-xs font-bold text-slate-900 dark:text-white">Evaluating 200 Transactions Through Agent State Machine...</p>
+                <p className="text-[10px] text-slate-500">Checking stopping rules, salary windows, and customer response curves.</p>
               </div>
             ) : evalResult ? (
-              <div className="space-y-4 border-t border-brand-border pt-4">
+              <div className="space-y-4 border-t border-slate-200 dark:border-brand-border pt-4">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-                  <div className="bg-brand-dark p-2.5 rounded-lg border border-brand-border">
-                    <span className="text-[9px] text-gray-400 block uppercase">At Risk</span>
-                    <span className="text-xs font-bold text-white font-mono">
+                  <div className="bg-slate-50 dark:bg-brand-dark p-2.5 rounded-lg border border-slate-200 dark:border-brand-border">
+                    <span className="text-[9px] text-slate-500 dark:text-slate-400 block uppercase font-semibold">At Risk</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-white font-mono">
                       ₹{evalResult.final_metrics?.total_at_risk?.toLocaleString('en-IN')}
                     </span>
                   </div>
-                  <div className="bg-brand-dark p-2.5 rounded-lg border border-brand-border">
-                    <span className="text-[9px] text-emerald-400 block uppercase">Recovered</span>
-                    <span className="text-xs font-bold text-emerald-400 font-mono">
+                  <div className="bg-slate-50 dark:bg-brand-dark p-2.5 rounded-lg border border-slate-200 dark:border-brand-border">
+                    <span className="text-[9px] text-emerald-600 dark:text-emerald-400 block uppercase font-semibold">Recovered</span>
+                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-mono">
                       ₹{evalResult.final_metrics?.total_recovered?.toLocaleString('en-IN')}
                     </span>
                   </div>
-                  <div className="bg-brand-dark p-2.5 rounded-lg border border-brand-border">
-                    <span className="text-[9px] text-gray-400 block uppercase">Recovery Rate</span>
-                    <span className="text-xs font-bold text-white">
+                  <div className="bg-slate-50 dark:bg-brand-dark p-2.5 rounded-lg border border-slate-200 dark:border-brand-border">
+                    <span className="text-[9px] text-slate-500 dark:text-slate-400 block uppercase font-semibold">Recovery Rate</span>
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">
                       {evalResult.final_metrics?.recovery_rate?.toFixed(1)}%
                     </span>
                   </div>
-                  <div className="bg-brand-dark p-2.5 rounded-lg border border-brand-border">
-                    <span className="text-[9px] text-indigo-400 block uppercase">Net Return</span>
-                    <span className="text-xs font-bold text-indigo-400">
+                  <div className="bg-slate-50 dark:bg-brand-dark p-2.5 rounded-lg border border-slate-200 dark:border-brand-border">
+                    <span className="text-[9px] text-indigo-600 dark:text-indigo-400 block uppercase font-semibold">Net Return</span>
+                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
                       {evalResult.final_metrics?.total_cost > 0 
                         ? `${(evalResult.final_metrics?.total_recovered / evalResult.final_metrics?.total_cost).toFixed(1)}x` 
                         : '43.1x'}
@@ -575,14 +575,14 @@ function App() {
                   </div>
                 </div>
 
-                <div className="p-3 bg-emerald-950/30 border border-emerald-900/50 rounded-xl flex items-center gap-2 text-xs text-emerald-300">
-                  <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 rounded-xl flex items-center gap-2 text-xs text-emerald-800 dark:text-emerald-300">
+                  <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>Evaluation complete! Data verified and saved to <code>simulation_report.json</code>.</span>
                 </div>
 
                 <button
                   onClick={() => setShowEvalModal(false)}
-                  className="w-full py-2 bg-brand-primary hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all"
+                  className="w-full py-2 bg-brand-primary hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all cursor-pointer"
                 >
                   Close & View on Dashboard
                 </button>
@@ -591,7 +591,7 @@ function App() {
               <div className="pt-2">
                 <button
                   onClick={handleRunEvaluation}
-                  className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all"
+                  className="w-full py-2.5 bg-[#0066FF] hover:bg-[#0052CC] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <PlayCircle size={15} />
                   Start 200-Case Evaluation Run

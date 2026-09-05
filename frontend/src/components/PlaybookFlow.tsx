@@ -311,7 +311,7 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
       
       {/* 1. PLAYBOOK INSPECTION DRAWER */}
       {inspectedPlaybook && PLAYBOOKS[inspectedPlaybook] && (
-        <div className="p-4 bg-brand-dark rounded-xl border-2 border-brand-primary animate-fadeIn shadow-2xl space-y-3">
+        <div className="p-4 bg-slate-50 dark:bg-brand-dark rounded-xl border-2 border-[#0066FF] animate-fadeIn shadow-lg space-y-3">
           {(() => {
             const p = PLAYBOOKS[inspectedPlaybook];
             const Icon = p.icon;
@@ -326,25 +326,25 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
 
             return (
               <>
-                <div className="flex items-start justify-between gap-3 border-b border-brand-border pb-3">
+                <div className="flex items-start justify-between gap-3 border-b border-slate-200 dark:border-brand-border pb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-white dark:bg-brand-surface border border-slate-200 dark:border-brand-border flex items-center justify-center shadow-xs">
                       <Icon size={20} className={p.textColor} />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h5 className="text-sm font-bold text-white">{p.title}</h5>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-brand-primary/20 text-[#75A3FF] border border-brand-primary/30">
+                        <h5 className="text-sm font-bold text-slate-900 dark:text-white">{p.title}</h5>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-[#0066FF] border border-blue-200 dark:bg-brand-primary/20 dark:text-[#75A3FF] dark:border-brand-primary/30">
                           {p.badge}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-400 mt-0.5">{p.subtitle}</p>
+                      <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">{p.subtitle}</p>
                     </div>
                   </div>
 
                   <button 
                     onClick={() => setInspectedPlaybook(null)}
-                    className="text-gray-400 hover:text-white p-1 rounded-lg bg-slate-800 cursor-pointer"
+                    className="text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg bg-slate-200 dark:bg-slate-800 cursor-pointer transition-colors"
                     title="Close"
                   >
                     <X size={14} />
@@ -352,39 +352,39 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                  <div className="p-3 bg-brand-surface rounded-lg border border-brand-border space-y-1">
-                    <span className="text-[10px] uppercase font-bold text-gray-400 block">Strategy & Mechanism</span>
-                    <p className="text-slate-200 text-[11px] leading-relaxed">{p.description}</p>
+                  <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-slate-200 dark:border-brand-border space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-gray-400 block">Strategy & Mechanism</span>
+                    <p className="text-slate-700 dark:text-slate-200 text-[11px] leading-relaxed">{p.description}</p>
                   </div>
 
-                  <div className="p-3 bg-brand-surface rounded-lg border border-brand-border space-y-1">
-                    <span className="text-[10px] uppercase font-bold text-gray-400 block">Stopping Rule & Safety</span>
-                    <p className="text-amber-300 text-[11px] leading-relaxed font-medium">{p.stoppingRule}</p>
+                  <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-slate-200 dark:border-brand-border space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-gray-400 block">Stopping Rule & Safety</span>
+                    <p className="text-amber-600 dark:text-amber-300 text-[11px] leading-relaxed font-medium">{p.stoppingRule}</p>
                     <div className="pt-1.5 flex flex-wrap gap-1">
                       {p.triggerCodes.map(code => (
-                        <span key={code} className="text-[9px] bg-slate-800 text-gray-300 px-1.5 py-0.5 rounded font-mono">
+                        <span key={code} className="text-[9px] bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-gray-300 px-1.5 py-0.5 rounded font-mono">
                           {code}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="p-3 bg-brand-surface rounded-lg border border-brand-border flex flex-col justify-between space-y-2">
+                  <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-slate-200 dark:border-brand-border flex flex-col justify-between space-y-2">
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-gray-400 block">Outreach Channels</span>
+                      <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-gray-400 block">Outreach Channels</span>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {p.channels.map(ch => (
-                          <span key={ch} className="text-[10px] bg-blue-950/60 text-blue-300 border border-blue-800 px-2 py-0.5 rounded">
+                          <span key={ch} className="text-[10px] bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800 px-2 py-0.5 rounded font-medium">
                             {ch}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 pt-2 border-t border-brand-border">
+                    <div className="flex items-center gap-2 pt-2 border-t border-slate-200 dark:border-brand-border">
                       <button
                         onClick={() => handleFilterCases(p.type)}
-                        className="flex-1 py-1.5 bg-brand-primary hover:bg-blue-600 active:scale-95 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1 cursor-pointer transition-all"
+                        className="flex-1 py-1.5 bg-[#0066FF] hover:bg-[#0052CC] active:scale-95 text-white font-bold text-xs rounded-lg flex items-center justify-center gap-1 cursor-pointer transition-all shadow-xs"
                       >
                         <Filter size={12} />
                         Filter Cases ({matchingCount})
@@ -392,7 +392,7 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
 
                       <button
                         onClick={() => handleQuickInject(p.type)}
-                        className="py-1.5 px-3 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 font-semibold text-xs rounded-lg flex items-center justify-center gap-1 cursor-pointer transition-all border border-slate-700"
+                        className="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 font-semibold text-xs rounded-lg flex items-center justify-center gap-1 cursor-pointer transition-all border border-slate-200 dark:border-slate-700"
                         title="Inject test failure for this playbook"
                       >
                         <Play size={11} />
@@ -409,43 +409,43 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
 
       {/* 2. DIAGNOSER INSPECTION DRAWER */}
       {showDiagnoserInfo && (
-        <div className="p-4 bg-brand-dark rounded-xl border-2 border-blue-400 animate-fadeIn shadow-2xl space-y-3">
-          <div className="flex items-start justify-between gap-3 border-b border-brand-border pb-2.5">
+        <div className="p-4 bg-slate-50 dark:bg-brand-dark rounded-xl border-2 border-blue-400 animate-fadeIn shadow-lg space-y-3">
+          <div className="flex items-start justify-between gap-3 border-b border-slate-200 dark:border-brand-border pb-2.5">
             <div className="flex items-center gap-2.5">
-              <Bot size={20} className="text-brand-primary" />
+              <Bot size={20} className="text-[#0066FF]" />
               <div>
-                <h5 className="text-sm font-bold text-white">AI Diagnoser & Risk Engine (Gemini-Flash-Latest)</h5>
-                <p className="text-xs text-gray-400">Autonomous classification of raw banking response codes</p>
+                <h5 className="text-sm font-bold text-slate-900 dark:text-white">AI Diagnoser & Risk Engine (Gemini-Flash-Latest)</h5>
+                <p className="text-xs text-slate-500 dark:text-gray-400">Autonomous classification of raw banking response codes</p>
               </div>
             </div>
-            <button onClick={() => setShowDiagnoserInfo(false)} className="text-gray-400 hover:text-white p-1 rounded-lg bg-slate-800 cursor-pointer">
+            <button onClick={() => setShowDiagnoserInfo(false)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg bg-slate-200 dark:bg-slate-800 cursor-pointer transition-colors">
               <X size={14} />
             </button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
-            <div className="p-3 bg-brand-surface rounded-lg border border-red-900/40">
-              <span className="text-red-400 font-bold block text-sm">0.95 Risk Score</span>
-              <span className="text-[10px] text-gray-300 font-semibold">suspected_fraud / stolen_card</span>
-              <p className="text-[10px] text-gray-400 mt-1">Routes to <strong>Hard Decline Halt</strong>. Immediately kills retries and messaging.</p>
+            <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-red-200 dark:border-red-900/40">
+              <span className="text-red-600 dark:text-red-400 font-bold block text-sm">0.95 Risk Score</span>
+              <span className="text-[10px] text-slate-700 dark:text-gray-300 font-semibold">suspected_fraud / stolen_card</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-1">Routes to <strong>Hard Decline Halt</strong>. Immediately kills retries and messaging.</p>
             </div>
 
-            <div className="p-3 bg-brand-surface rounded-lg border border-violet-900/40">
-              <span className="text-violet-400 font-bold block text-sm">0.25 Risk Score</span>
-              <span className="text-[10px] text-gray-300 font-semibold">incorrect_pin / otp_expired</span>
-              <p className="text-[10px] text-gray-400 mt-1">Routes to <strong>WhatsApp Hinglish</strong>. Low friction, 1-click checkout recovery.</p>
+            <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-purple-200 dark:border-violet-900/40">
+              <span className="text-purple-600 dark:text-violet-400 font-bold block text-sm">0.25 Risk Score</span>
+              <span className="text-[10px] text-slate-700 dark:text-gray-300 font-semibold">incorrect_pin / otp_expired</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-1">Routes to <strong>WhatsApp Hinglish</strong>. Low friction, 1-click checkout recovery.</p>
             </div>
 
-            <div className="p-3 bg-brand-surface rounded-lg border border-blue-900/40">
-              <span className="text-blue-400 font-bold block text-sm">0.35 Risk Score</span>
-              <span className="text-[10px] text-gray-300 font-semibold">insufficient_funds (NSF)</span>
-              <p className="text-[10px] text-gray-400 mt-1">Routes to <strong>Mandate Retry Sequencer</strong>. Aligns debits to salary dates.</p>
+            <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-blue-200 dark:border-blue-900/40">
+              <span className="text-[#0066FF] dark:text-blue-400 font-bold block text-sm">0.35 Risk Score</span>
+              <span className="text-[10px] text-slate-700 dark:text-gray-300 font-semibold">insufficient_funds (NSF)</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-1">Routes to <strong>Mandate Retry Sequencer</strong>. Aligns debits to salary dates.</p>
             </div>
 
-            <div className="p-3 bg-brand-surface rounded-lg border border-amber-900/40">
-              <span className="text-amber-400 font-bold block text-sm">0.30 Risk Score</span>
-              <span className="text-[10px] text-gray-300 font-semibold">payment_overdue (B2B)</span>
-              <p className="text-[10px] text-gray-400 mt-1">Routes to <strong>B2B Receivables Chaser</strong>. Sequential tone escalation.</p>
+            <div className="p-3 bg-white dark:bg-brand-surface rounded-lg border border-amber-200 dark:border-amber-900/40">
+              <span className="text-amber-600 dark:text-amber-400 font-bold block text-sm">0.30 Risk Score</span>
+              <span className="text-[10px] text-slate-700 dark:text-gray-300 font-semibold">payment_overdue (B2B)</span>
+              <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-1">Routes to <strong>B2B Receivables Chaser</strong>. Sequential tone escalation.</p>
             </div>
           </div>
         </div>
@@ -453,16 +453,16 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
 
       {/* 3. EVENT INGESTION QUICK SIMULATOR */}
       {showIngestionInfo && (
-        <div className="p-4 bg-brand-dark rounded-xl border-2 border-emerald-400 animate-fadeIn shadow-2xl space-y-3">
-          <div className="flex items-start justify-between gap-3 border-b border-brand-border pb-2.5">
+        <div className="p-4 bg-slate-50 dark:bg-brand-dark rounded-xl border-2 border-emerald-400 animate-fadeIn shadow-lg space-y-3">
+          <div className="flex items-start justify-between gap-3 border-b border-slate-200 dark:border-brand-border pb-2.5">
             <div className="flex items-center gap-2.5">
-              <GitCommit size={20} className="text-emerald-400" />
+              <GitCommit size={20} className="text-emerald-600 dark:text-emerald-400" />
               <div>
-                <h5 className="text-sm font-bold text-white">Live Gateway Webhook Ingestion</h5>
-                <p className="text-xs text-gray-400">Simulate incoming payment failure events directly from your gateway</p>
+                <h5 className="text-sm font-bold text-slate-900 dark:text-white">Live Gateway Webhook Ingestion</h5>
+                <p className="text-xs text-slate-500 dark:text-gray-400">Simulate incoming payment failure events directly from your gateway</p>
               </div>
             </div>
-            <button onClick={() => setShowIngestionInfo(false)} className="text-gray-400 hover:text-white p-1 rounded-lg bg-slate-800 cursor-pointer">
+            <button onClick={() => setShowIngestionInfo(false)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white p-1 rounded-lg bg-slate-200 dark:bg-slate-800 cursor-pointer transition-colors">
               <X size={14} />
             </button>
           </div>
@@ -470,28 +470,28 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
           <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
             <button
               onClick={() => handleQuickInject('payment')}
-              className="px-3 py-2 bg-blue-950/60 hover:bg-blue-900 text-blue-300 border border-blue-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+              className="px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:hover:bg-blue-900 dark:text-blue-300 dark:border-blue-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
             >
               + UPI PIN Failure (WhatsApp)
             </button>
 
             <button
               onClick={() => handleQuickInject('checkout')}
-              className="px-3 py-2 bg-emerald-950/60 hover:bg-emerald-900 text-emerald-300 border border-emerald-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+              className="px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:hover:bg-emerald-900 dark:text-emerald-300 dark:border-emerald-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
             >
               + Cart Drop (Discount Voucher)
             </button>
 
             <button
               onClick={() => handleQuickInject('subscription')}
-              className="px-3 py-2 bg-violet-950/60 hover:bg-violet-900 text-violet-300 border border-violet-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+              className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 dark:bg-violet-950/60 dark:hover:bg-violet-900 dark:text-violet-300 dark:border-violet-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
             >
               + Mandate Decline (Salary Timing)
             </button>
 
             <button
               onClick={() => handleQuickInject('invoice')}
-              className="px-3 py-2 bg-amber-950/60 hover:bg-amber-900 text-amber-300 border border-amber-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+              className="px-3 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 dark:bg-amber-950/60 dark:hover:bg-amber-900 dark:text-amber-300 dark:border-amber-800 rounded-lg font-semibold flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-xs"
             >
               + B2B Invoice Overdue (Escalation)
             </button>
@@ -500,7 +500,7 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
       )}
 
       {/* Outcome Rules Legend */}
-      <div className="pt-2 border-t border-brand-border/40 flex flex-wrap justify-between items-center text-[10px] text-gray-400 gap-2">
+      <div className="pt-2 border-t border-brand-border/40 flex flex-wrap justify-between items-center text-[10px] text-slate-600 dark:text-gray-400 gap-2">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full inline-block"></span>
@@ -516,7 +516,7 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
           </div>
         </div>
 
-        <span className="text-[10px] text-gray-500 font-mono">
+        <span className="text-[10px] text-slate-500 font-mono">
           Tip: Click any playbook box to filter the table below
         </span>
       </div>
