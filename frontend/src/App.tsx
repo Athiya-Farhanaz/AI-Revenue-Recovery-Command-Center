@@ -381,24 +381,24 @@ function App() {
   return (
     <div className={`min-h-screen flex flex-col bg-brand-dark text-brand-text transition-colors duration-200 ${theme}`}>
       
-      {/* Navigation Header: Iconic Razorpay Deep Navy */}
-      <header className="sticky top-0 z-40 bg-[#072654] border-b border-[#194685] px-6 py-3 flex flex-wrap justify-between items-center shadow-lg gap-3 text-white">
+      {/* Navigation Header: Enterprise Razorpay Navy */}
+      <header className="sticky top-0 z-40 bg-[#071933] border-b border-[#162C4E] px-6 py-3 flex flex-wrap justify-between items-center shadow-sm gap-3 text-white">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-2 rounded-xl text-white shadow-md shadow-blue-900/30">
-            <ShieldCheck size={22} className="stroke-[2.5]" />
+          <div className="w-8 h-8 rounded-lg bg-[#0066FF] flex items-center justify-center text-white shadow-sm shrink-0">
+            <ShieldCheck size={19} className="stroke-[2.5]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-base font-black tracking-tight text-white">AI Revenue Recovery</h1>
-              <span className="bg-[#002e7a] text-[9px] font-bold text-blue-200 border border-[#0047b3] px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <h1 className="text-sm font-bold tracking-tight text-white">AI Revenue Recovery</h1>
+              <span className="bg-[#0D2240] text-[11px] font-semibold text-[#60A5FA] border border-[#1D3B64] px-2 py-0.5 rounded">
                 Razorpay Agent
               </span>
-              <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                Real-Time Node
+              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-950/60 border border-emerald-800/50 px-2 py-0.5 rounded">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Operational
               </span>
             </div>
-            <p className="text-[10px] text-blue-200/80">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
+            <p className="text-xs text-slate-400">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
           </div>
         </div>
 
@@ -408,7 +408,7 @@ function App() {
           {/* Evaluation Batch Button */}
           <button
             onClick={() => setShowEvalModal(true)}
-            className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-white-forced rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
+            className="px-3.5 py-1.5 bg-[#0066FF] hover:bg-[#0052CC] text-white text-white-forced rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer border border-blue-400/20"
           >
             <PlayCircle size={14} />
             Run Evaluation Batch (200)
@@ -417,30 +417,30 @@ function App() {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 bg-[#0a316b] hover:bg-[#0c3a7d] text-white border border-[#194685] rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="p-1.5 bg-[#0D2240] hover:bg-[#15325C] text-slate-200 border border-[#1D3B64] rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
             title={`Switch to Razorpay ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
           >
             {theme === 'dark' ? (
               <>
-                <Sun size={15} className="text-amber-400" />
-                <span className="hidden sm:inline text-[11px] text-white">Light Mode</span>
+                <Sun size={14} className="text-amber-400" />
+                <span className="hidden sm:inline text-xs text-slate-200 font-medium">Light Mode</span>
               </>
             ) : (
               <>
-                <Moon size={15} className="text-[#75A3FF]" />
-                <span className="hidden sm:inline text-[11px] text-white">Dark Mode</span>
+                <Moon size={14} className="text-[#60A5FA]" />
+                <span className="hidden sm:inline text-xs text-slate-200 font-medium">Dark Mode</span>
               </>
             )}
           </button>
 
           {/* Tab Switcher */}
-          <div className="flex bg-[#0a316b] p-1 rounded-xl border border-[#194685] text-xs font-semibold shadow-inner">
+          <div className="flex bg-[#0A1D38] p-0.5 rounded-lg border border-[#1D3B64] text-xs font-medium">
             <button
               onClick={() => setActiveTab('dashboard')}
-              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'dashboard'
-                  ? 'bg-brand-primary text-white shadow-md text-white-forced'
-                  : 'text-blue-200 hover:text-white'
+                  ? 'bg-[#0066FF] text-white shadow-sm text-white-forced font-semibold'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               <BarChart2 size={13} />
@@ -449,16 +449,16 @@ function App() {
             
             <button
               onClick={() => setActiveTab('stream')}
-              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'stream'
-                  ? 'bg-brand-primary text-white shadow-md text-white-forced'
-                  : 'text-blue-200 hover:text-white'
+                  ? 'bg-[#0066FF] text-white shadow-sm text-white-forced font-semibold'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
-              <Radio size={13} className={metrics.active_cases > 0 ? 'text-emerald-400 animate-pulse' : ''} />
+              <Radio size={13} className={metrics.active_cases > 0 ? 'text-emerald-400' : ''} />
               Case Inspector
               {metrics.active_cases > 0 && (
-                <span className="ml-1 bg-amber-500 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">
+                <span className="ml-1 bg-amber-500 text-slate-950 text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                   {metrics.active_cases}
                 </span>
               )}

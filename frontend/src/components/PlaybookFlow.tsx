@@ -155,19 +155,19 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
   };
 
   return (
-    <div className="bg-brand-surface border border-brand-border rounded-xl p-5 shadow-lg space-y-4 transition-all">
+    <div className="bg-brand-surface border border-brand-border rounded-xl p-5 shadow-sm space-y-4 transition-all">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h4 className="text-base font-bold text-white flex items-center gap-2">
-            <Zap size={16} className="text-brand-primary animate-pulse" />
+          <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <Zap size={16} className="text-[#0066FF]" />
             Agentic Recovery Playbook Mapper
-            <span className="text-[10px] font-semibold bg-brand-primary/20 text-[#75A3FF] border border-brand-primary/30 px-2 py-0.5 rounded-full">
+            <span className="text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800/50 px-2.5 py-0.5 rounded">
               Interactive • Click any node to inspect & filter
             </span>
           </h4>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {selectedCase 
               ? `Currently highlighting active autonomous routing for: ${selectedCase.customer_name} (${selectedCase.failure_code})`
               : 'Click any playbook card below to filter matching cases, inspect LLM prompts, or simulate a live failure event.'
@@ -176,15 +176,15 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
         </div>
 
         {selectedCase && (
-          <div className="flex items-center gap-2 text-xs bg-brand-dark px-3 py-1.5 rounded-lg border border-brand-border">
-            <span className="text-gray-400 font-medium">Selected Case:</span>
-            <span className="text-white font-bold">{selectedCase.customer_name}</span>
-            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+          <div className="flex items-center gap-2 text-xs bg-slate-50 dark:bg-[#0F172A] px-3 py-1.5 rounded-lg border border-brand-border">
+            <span className="text-slate-500 dark:text-slate-400 font-medium">Selected Case:</span>
+            <span className="text-slate-900 dark:text-white font-bold">{selectedCase.customer_name}</span>
+            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
               selectedCase.status === 'recovered' 
-                ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' 
+                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800' 
                 : selectedCase.status === 'failed'
-                ? 'bg-red-950 text-red-400 border border-red-800'
-                : 'bg-amber-950 text-amber-400 border border-amber-800'
+                ? 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950 dark:text-red-300 dark:border-red-800'
+                : 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-800'
             }`}>
               {selectedCase.status.toUpperCase()}
             </span>
@@ -202,20 +202,20 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
             setInspectedPlaybook(null);
             setShowDiagnoserInfo(false);
           }}
-          className={`xl:col-span-2 flex flex-col items-center justify-center p-3 bg-brand-dark rounded-xl border transition-all text-center shadow cursor-pointer hover:border-brand-primary active:scale-95 group ${
-            showIngestionInfo ? 'border-brand-primary ring-2 ring-brand-primary/30' : 'border-brand-border'
+          className={`xl:col-span-2 flex flex-col items-center justify-center p-3.5 bg-slate-50 dark:bg-[#0F172A] rounded-xl border transition-all text-center shadow-sm cursor-pointer hover:border-[#0066FF] group ${
+            showIngestionInfo ? 'border-[#0066FF] ring-1 ring-[#0066FF]' : 'border-brand-border'
           }`}
           title="Click to inspect webhook ingestion"
         >
-          <GitCommit className="text-brand-primary group-hover:scale-110 transition-transform mb-1" size={24} />
-          <span className="text-xs font-bold text-white group-hover:text-brand-primary transition-colors">Event Ingested</span>
-          <span className="text-[9px] text-gray-400">Live Gateway Webhook</span>
-          <span className="mt-1 text-[8px] bg-slate-800 text-gray-300 px-1.5 py-0.5 rounded">Click to Ingest</span>
+          <GitCommit className="text-[#0066FF] mb-1.5" size={22} />
+          <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#0066FF] transition-colors">Event Ingested</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400">Live Gateway Webhook</span>
+          <span className="mt-1.5 text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-medium">Click to Ingest</span>
         </button>
 
         {/* Arrow 1 */}
         <div className="hidden xl:flex xl:col-span-1 justify-center">
-          <ArrowRight className="text-brand-border animate-pulse" size={16} />
+          <ArrowRight className="text-slate-400 dark:text-slate-600" size={16} />
         </div>
 
         {/* Node 2: AI Diagnoser */}
@@ -225,23 +225,23 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
             setInspectedPlaybook(null);
             setShowIngestionInfo(false);
           }}
-          className={`xl:col-span-2 flex flex-col items-center justify-center p-3 bg-slate-900 border transition-all text-center shadow-md relative cursor-pointer hover:border-blue-400 active:scale-95 group ${
-            showDiagnoserInfo ? 'border-blue-400 ring-2 ring-blue-500/30' : 'border-brand-primary'
+          className={`xl:col-span-2 flex flex-col items-center justify-center p-3.5 bg-slate-50 dark:bg-[#0F172A] border transition-all text-center shadow-sm relative cursor-pointer hover:border-[#0066FF] group rounded-xl ${
+            showDiagnoserInfo ? 'border-[#0066FF] ring-1 ring-[#0066FF]' : 'border-brand-border'
           }`}
           title="Click to inspect Gemini AI diagnosis logic"
         >
-          <div className="absolute -top-2.5 bg-brand-primary text-[8px] font-bold px-1.5 py-0.5 rounded text-white uppercase tracking-wider">
+          <div className="absolute -top-2.5 bg-[#0066FF] text-[10px] font-semibold px-2 py-0.5 rounded text-white uppercase tracking-wider shadow-sm">
             AI DIAGNOSER
           </div>
-          <Bot className="text-brand-primary group-hover:scale-110 transition-transform mb-1 mt-1" size={22} />
-          <span className="text-xs font-bold text-brand-primary group-hover:text-white transition-colors">Classify & Route</span>
-          <span className="text-[9px] text-gray-400">Risk Scoring 0.0 - 1.0</span>
-          <span className="mt-1 text-[8px] bg-slate-800 text-blue-300 px-1.5 py-0.5 rounded">Inspect AI Rules</span>
+          <Bot className="text-[#0066FF] mb-1.5 mt-1" size={22} />
+          <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#0066FF] transition-colors">Classify & Route</span>
+          <span className="text-[10px] text-slate-500 dark:text-slate-400">Risk Scoring 0.0 - 1.0</span>
+          <span className="mt-1.5 text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded font-medium">Inspect Rules</span>
         </button>
 
         {/* Arrow 2 */}
         <div className="hidden xl:flex xl:col-span-1 justify-center">
-          <ArrowRight className="text-brand-border animate-pulse" size={16} />
+          <ArrowRight className="text-slate-400 dark:text-slate-600" size={16} />
         </div>
 
         {/* Node 3: 4 Playbook Cards */}
@@ -264,38 +264,38 @@ export const PlaybookFlow: React.FC<PlaybookFlowProps> = ({
               <div
                 key={key}
                 onClick={() => handleCardClick(key)}
-                className={`p-3 bg-brand-dark rounded-xl border transition-all duration-200 cursor-pointer text-left hover:scale-[1.02] active:scale-95 relative ${
+                className={`p-3.5 bg-slate-50/70 hover:bg-slate-100 dark:bg-[#0F172A] dark:hover:bg-[#152238] rounded-xl border transition-all cursor-pointer text-left relative ${
                   isActive 
-                    ? `${p.activeBorder} border-2 shadow-lg ${p.glowColor}` 
+                    ? 'border-[#0066FF] ring-1 ring-[#0066FF] shadow-sm' 
                     : isInspected
-                    ? 'border-white border-2 shadow-md'
-                    : `${p.borderColor} hover:border-gray-500 opacity-90`
+                    ? 'border-slate-800 dark:border-white shadow-sm'
+                    : 'border-slate-200/80 dark:border-[#1E293B]'
                 }`}
               >
                 {/* Active Indicator Badge */}
                 {isActive && (
-                  <span className="absolute -top-2 -right-2 bg-emerald-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full shadow animate-bounce-short flex items-center gap-1">
+                  <span className="absolute -top-2 -right-2 bg-emerald-600 text-white font-semibold text-[10px] px-2 py-0.5 rounded shadow-sm flex items-center gap-1">
                     <Check size={10} /> ACTIVE ROUTE
                   </span>
                 )}
 
                 <div className="flex items-center justify-between gap-1 mb-1">
                   <div className="flex items-center gap-1.5">
-                    <Icon size={14} className={isActive ? `${p.textColor} animate-pulse` : 'text-gray-400'} />
-                    <span className="text-xs font-bold text-white">{p.title}</span>
+                    <Icon size={14} className={isActive ? 'text-[#0066FF]' : 'text-slate-500'} />
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">{p.title}</span>
                   </div>
-                  <span className="text-[9px] bg-slate-800 text-gray-300 px-1.5 py-0.5 rounded font-mono">
+                  <span className="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-1.5 py-0.5 rounded font-mono">
                     {matchingCount} cases
                   </span>
                 </div>
 
-                <p className="text-[10px] text-gray-400 leading-snug line-clamp-2">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-snug line-clamp-2">
                   {p.subtitle}
                 </p>
 
-                <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-800/80 text-[9px]">
-                  <span className={`font-semibold ${p.textColor}`}>{p.badge}</span>
-                  <span className="text-gray-400 hover:text-white flex items-center gap-0.5">
+                <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
+                  <span className="font-semibold text-slate-700 dark:text-slate-300 text-[11px]">{p.badge}</span>
+                  <span className="text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-0.5 text-[11px]">
                     Inspect & Filter &rarr;
                   </span>
                 </div>

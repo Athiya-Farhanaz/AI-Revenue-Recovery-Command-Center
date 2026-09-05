@@ -49,13 +49,13 @@ export const CaseList: React.FC<CaseListProps> = ({
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'recovered':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-emerald-950/60 text-brand-accent border border-emerald-900/50 flex items-center gap-1"><CheckCircle size={10} /> Recovered</span>;
+        return <span className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/50 flex items-center gap-1"><CheckCircle size={10} /> Recovered</span>;
       case 'failed':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-950/60 text-brand-danger border border-red-900/50 flex items-center gap-1"><ShieldAlert size={10} /> Failed</span>;
+        return <span className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/50 dark:text-red-300 dark:border-red-800/50 flex items-center gap-1"><ShieldAlert size={10} /> Failed</span>;
       case 'escalated':
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-950/60 text-brand-warning border border-amber-900/50 flex items-center gap-1"><AlertCircle size={10} /> Escalated</span>;
+        return <span className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/50 flex items-center gap-1"><AlertCircle size={10} /> Escalated</span>;
       default:
-        return <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-950/60 text-blue-400 border border-blue-900/50 flex items-center gap-1"><Clock size={10} /> Recovery Active</span>;
+        return <span className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/50 dark:text-blue-300 dark:border-blue-800/50 flex items-center gap-1"><Clock size={10} /> In Dunning</span>;
     }
   };
 
@@ -192,26 +192,26 @@ export const CaseList: React.FC<CaseListProps> = ({
                 onClick={() => onSelectCase(c.id)}
                 className={`p-3 rounded-xl border transition-all cursor-pointer text-xs relative ${
                   isSelected 
-                    ? 'bg-blue-950/30 border-brand-primary shadow-md' 
-                    : 'bg-brand-dark/90 border-brand-border hover:border-slate-700'
+                    ? 'bg-blue-50/80 border-[#0066FF] shadow-sm dark:bg-[#0066FF]/15 dark:border-[#0066FF]' 
+                    : 'bg-slate-50/70 hover:bg-slate-100 border-slate-200/80 dark:bg-[#0F172A] dark:hover:bg-[#152238] dark:border-[#1E293B]'
                 }`}
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h5 className="font-bold text-white text-xs">{c.customer_name}</h5>
-                    <span className="text-[10px] text-gray-400 font-mono block mt-0.5">
-                      {c.id} • <span className="uppercase text-blue-400">{c.type}</span>
+                    <h5 className="font-bold text-slate-900 dark:text-white text-xs">{c.customer_name}</h5>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block mt-0.5">
+                      {c.id} • <span className="uppercase text-[#0066FF] dark:text-blue-400 font-semibold">{c.type}</span>
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className="font-bold text-white text-xs font-mono">{formatCurrency(c.amount)}</span>
-                    <span className="text-[9px] text-gray-500 block">Code: {c.failure_code}</span>
+                    <span className="font-bold text-slate-900 dark:text-white text-xs font-mono">{formatCurrency(c.amount)}</span>
+                    <span className="text-[10px] text-slate-400 block">Code: {c.failure_code}</span>
                   </div>
                 </div>
 
-                <div className="mt-3 flex justify-between items-center border-t border-brand-border/40 pt-2">
+                <div className="mt-3 flex justify-between items-center border-t border-brand-border/60 pt-2">
                   <div>{getStatusBadge(c.status)}</div>
-                  <span className="text-[10px] text-gray-400 font-mono">
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                     Active Step: {c.current_escalation_level}/3
                   </span>
                 </div>
@@ -220,7 +220,7 @@ export const CaseList: React.FC<CaseListProps> = ({
           })}
 
           {filteredCases.length === 0 && (
-            <div className="text-gray-500 text-xs italic text-center py-10">
+            <div className="text-slate-400 text-xs italic text-center py-10">
               No transactions match your search criteria.
             </div>
           )}
@@ -228,7 +228,7 @@ export const CaseList: React.FC<CaseListProps> = ({
       </div>
 
       {/* RIGHT COLUMN: Case Detail & Audits */}
-      <div className="bg-brand-surface border border-brand-border rounded-xl p-5 lg:col-span-7 flex flex-col shadow-lg h-[680px] overflow-hidden">
+      <div className="bg-brand-surface border border-brand-border rounded-xl p-5 lg:col-span-7 flex flex-col shadow-sm h-[680px] overflow-hidden">
         {caseDetail ? (
           <div className="flex flex-col h-full space-y-4">
             
@@ -236,21 +236,21 @@ export const CaseList: React.FC<CaseListProps> = ({
             <div className="flex flex-wrap justify-between items-start border-b border-brand-border/60 pb-3 gap-2">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-base font-black text-white">{caseDetail.customer_name}</h3>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">{caseDetail.customer_name}</h3>
                   {getStatusBadge(caseDetail.status)}
                 </div>
-                <div className="flex items-center gap-3 text-[11px] text-gray-400 mt-1 font-mono">
-                  <span><User size={12} className="inline mr-1 text-gray-500" />{caseDetail.id}</span>
-                  <span><Mail size={12} className="inline mr-1 text-gray-500" />{caseDetail.customer_email}</span>
-                  <span><Phone size={12} className="inline mr-1 text-gray-500" />{caseDetail.customer_phone}</span>
+                <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
+                  <span><User size={12} className="inline mr-1 text-slate-400" />{caseDetail.id}</span>
+                  <span><Mail size={12} className="inline mr-1 text-slate-400" />{caseDetail.customer_email}</span>
+                  <span><Phone size={12} className="inline mr-1 text-slate-400" />{caseDetail.customer_phone}</span>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="text-[10px] text-gray-500 font-semibold uppercase block">Value At Risk</span>
-                <span className="text-lg font-black text-white font-mono">{formatCurrency(caseDetail.amount)}</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase block">Value At Risk</span>
+                <span className="text-lg font-bold text-slate-900 dark:text-white font-mono">{formatCurrency(caseDetail.amount)}</span>
                 {caseDetail.discount_offered > 0 && (
-                  <span className="text-[10px] text-emerald-400 block font-semibold">
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400 block font-semibold">
                     Net: {formatCurrency(caseDetail.amount - caseDetail.discount_offered)} (Discount Applied)
                   </span>
                 )}

@@ -63,48 +63,45 @@ export const SimControls: React.FC<SimControlsProps> = ({
         
         {/* Live Status Indicator */}
         <div className="flex items-center gap-3">
-          <div className={`relative flex items-center justify-center w-8 h-8 rounded-lg border ${
+          <div className={`flex items-center justify-center w-8 h-8 rounded-lg border ${
             isStreaming 
-              ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-400' 
-              : 'bg-amber-950/40 border-amber-500/50 text-amber-400'
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-600 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400' 
+              : 'bg-amber-50 border-amber-200 text-amber-600 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400'
           }`}>
-            <Activity size={16} className={isStreaming ? 'animate-pulse' : ''} />
-            {isStreaming && (
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            )}
+            <Activity size={16} />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className={`text-xs font-black tracking-wider uppercase flex items-center gap-1.5 ${
-                isStreaming ? 'text-emerald-400' : 'text-amber-400'
+              <span className={`text-xs font-bold tracking-wide uppercase flex items-center gap-1.5 ${
+                isStreaming ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${isStreaming ? 'bg-emerald-400' : 'bg-amber-400'}`}></span>
-                {isStreaming ? 'Live Autonomous Stream Active' : 'Autonomous Stream Paused'}
+                <span className={`w-2 h-2 rounded-full ${isStreaming ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+                {isStreaming ? 'Autonomous Recovery Engine Active' : 'Autonomous Engine Standby'}
               </span>
-              <span className="bg-slate-800 text-[10px] text-gray-400 border border-slate-700 px-1.5 py-0.5 rounded font-mono">
+              <span className="bg-slate-100 dark:bg-slate-800 text-[11px] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded font-mono font-medium">
                 {streamSpeed}x Speed
               </span>
             </div>
-            <p className="text-[11px] text-gray-400">
-              Autonomous AI agent ingesting live gateway webhooks & executing dunning workflows
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Real-time webhook listener & automated dunning pipeline execution
             </p>
           </div>
         </div>
 
         {/* Center: Live Digital Simulation Clock */}
         <div className="flex items-center gap-2 bg-brand-dark px-3 py-1.5 rounded-lg border border-brand-border">
-          <Clock size={14} className="text-blue-400" />
+          <Clock size={14} className="text-slate-400 dark:text-slate-400" />
           <div className="flex flex-col">
-            <span className="text-[9px] text-gray-500 font-semibold uppercase tracking-wider">Simulated Virtual Time</span>
-            <span className="text-xs text-slate-100 font-mono font-bold tracking-tight">{formattedTime()}</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">Simulated Virtual Time</span>
+            <span className="text-xs text-slate-800 dark:text-slate-100 font-mono font-semibold tracking-tight">{formattedTime()}</span>
           </div>
           {isSalaryWindow() ? (
-            <span className="ml-2 bg-emerald-950/60 text-emerald-400 border border-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">
+            <span className="ml-2 bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 text-[10px] font-semibold px-2 py-0.5 rounded-full">
               💼 Salary Window: 65% Mandate Recovery
             </span>
           ) : (
-            <span className="ml-2 bg-slate-800 text-gray-400 border border-slate-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
+            <span className="ml-2 bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 text-[10px] font-medium px-2 py-0.5 rounded-full">
               Standard Cycle
             </span>
           )}
@@ -116,10 +113,10 @@ export const SimControls: React.FC<SimControlsProps> = ({
           {/* Pause / Resume Live Streaming */}
           <button
             onClick={onToggleStreaming}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md transition-all ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer ${
               isStreaming 
-                ? 'bg-amber-600 hover:bg-amber-500 text-white shadow-amber-900/20'
-                : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-900/20'
+                ? 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
+                : 'bg-[#0066FF] hover:bg-[#0052CC] text-white border border-blue-500/30'
             }`}
           >
             {isStreaming ? (
@@ -136,15 +133,15 @@ export const SimControls: React.FC<SimControlsProps> = ({
           </button>
 
           {/* Speed Selector */}
-          <div className="flex bg-brand-dark p-0.5 rounded-lg border border-brand-border text-[11px] font-semibold" title="Simulation Speed: controls how fast virtual time advances in auto-stream">
+          <div className="flex bg-brand-dark p-0.5 rounded-lg border border-brand-border text-xs font-medium" title="Simulation Speed: controls how fast virtual time advances in auto-stream">
             {[1, 2, 5].map((speed) => (
               <button
                 key={speed}
                 onClick={() => onChangeSpeed(speed)}
-                className={`px-2 py-1 rounded transition-all cursor-pointer active:scale-95 ${
+                className={`px-2 py-1 rounded transition-all cursor-pointer ${
                   streamSpeed === speed 
-                    ? 'bg-brand-primary text-white font-bold shadow-sm' 
-                    : 'text-gray-400 hover:text-white'
+                    ? 'bg-[#0066FF] text-white font-semibold shadow-sm' 
+                    : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                 }`}
                 title={`${speed}x Simulation Pace (${speed * 5}s virtual time advanced per tick)`}
               >
@@ -158,7 +155,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
             <select
               value={tickSeconds}
               onChange={(e) => setTickSeconds(Number(e.target.value))}
-              className="bg-brand-dark border border-brand-border text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px] cursor-pointer"
+              className="bg-brand-dark border border-brand-border text-slate-700 dark:text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px] cursor-pointer"
               title="Select virtual time duration to advance"
             >
               <option value={5}>+5s</option>
@@ -168,7 +165,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
             </select>
             <button
               onClick={() => onTick(tickSeconds)}
-              className="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 border-y border-r border-brand-border px-2.5 py-1.5 rounded-r-lg text-xs font-semibold flex items-center h-[31px] cursor-pointer transition-all"
+              className="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-y border-r border-brand-border px-2.5 py-1.5 rounded-r-lg text-xs font-medium flex items-center h-[31px] cursor-pointer transition-all"
               title="Advance virtual clock forward by selected seconds to trigger due dunning actions"
             >
               <FastForward size={13} className="mr-1" />
@@ -183,7 +180,7 @@ export const SimControls: React.FC<SimControlsProps> = ({
                 onReset();
               }
             }}
-            className="p-1.5 bg-red-950/30 text-red-400 hover:bg-red-600 hover:text-white active:scale-95 rounded-lg border border-red-900/40 transition-all cursor-pointer"
+            className="p-1.5 bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-900/40 rounded-lg border border-red-200 dark:border-red-900/40 transition-all cursor-pointer"
             title="Reset Simulation Clock & Re-seed Demo Cases"
           >
             <Trash2 size={15} />
@@ -191,65 +188,65 @@ export const SimControls: React.FC<SimControlsProps> = ({
         </div>
       </div>
 
-      {/* Quick Webhook Event Injector Strip */}
+      {/* Quick Webhook Event Injector Strip: Clean Enterprise Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-1.5 text-gray-400 font-semibold text-[11px]">
-          <Zap size={14} className="text-amber-400" />
+        <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-semibold text-xs">
+          <Zap size={14} className="text-[#0066FF]" />
           <span>Quick Ingest Webhook:</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => onInject('payment', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-blue-950/60 active:scale-95 text-blue-300 border border-blue-900/40 hover:border-blue-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Ingest UPI PIN failure -> Dispatches WhatsApp Hinglish Recovery"
           >
-            <CreditCard size={12} className="text-blue-400" />
+            <CreditCard size={13} className="text-blue-500" />
             + UPI PIN Fail
           </button>
 
           <button
             onClick={() => onInject('checkout', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-emerald-950/60 active:scale-95 text-emerald-300 border border-emerald-900/40 hover:border-emerald-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Ingest checkout abandonment -> Dispatches Margin-Aware Discount Voucher"
           >
-            <ShoppingBag size={12} className="text-emerald-400" />
+            <ShoppingBag size={13} className="text-emerald-500" />
             + Cart Drop
           </button>
 
           <button
             onClick={() => onInject('subscription', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-violet-950/60 active:scale-95 text-violet-300 border border-violet-900/40 hover:border-violet-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Ingest recurring mandate decline -> Dispatches Mandate Retry Sequencer"
           >
-            <Layers size={12} className="text-violet-400" />
+            <Layers size={13} className="text-indigo-500" />
             + Mandate Decline
           </button>
 
           <button
             onClick={() => onInject('invoice', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-amber-950/60 active:scale-95 text-amber-300 border border-amber-900/40 hover:border-amber-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Ingest overdue B2B invoice -> Dispatches 3-Tier Tone Escalation"
           >
-            <FileText size={12} className="text-amber-400" />
+            <FileText size={13} className="text-amber-500" />
             + B2B Invoice Overdue
           </button>
 
           <button
             onClick={() => onInject('payment', 5)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-red-950/60 active:scale-95 text-red-300 border border-red-900/40 hover:border-red-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 dark:text-slate-200 dark:border-slate-700 rounded-md text-xs font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Simulate sudden traffic spike: Ingest 5 mixed failure webhooks"
           >
-            <ShieldAlert size={12} className="text-red-400" />
+            <ShieldAlert size={13} className="text-red-500" />
             + 5 Mixed Webhooks
           </button>
 
           <button
             onClick={() => onInject('mixed', 10)}
-            className="px-2.5 py-1 bg-brand-primary/20 hover:bg-brand-primary/40 active:scale-95 text-blue-200 border border-brand-primary/40 hover:border-brand-primary rounded-md text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            className="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-[#0066FF] border border-blue-200 dark:bg-blue-950/40 dark:hover:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/60 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
             title="Inject batch of 10 mixed failure events"
           >
-            <Zap size={12} className="text-brand-primary" />
+            <Zap size={13} className="text-[#0066FF] dark:text-blue-400" />
             + Batch (10)
           </button>
         </div>
