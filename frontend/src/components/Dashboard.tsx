@@ -19,6 +19,7 @@ interface DashboardProps {
   onSelectCase?: (id: string) => void;
   lastRecoveryAlert?: { name: string; amount: number; channel: string; timestamp: number } | null;
   isStreaming?: boolean;
+  theme?: 'dark' | 'light';
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ 
@@ -27,7 +28,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
   recentCases = [],
   onSelectCase,
   lastRecoveryAlert,
-  isStreaming = true
+  isStreaming = true,
+  theme = 'dark'
 }) => {
   const [logFilter, setLogFilter] = useState<'all' | 'nudge' | 'recovery' | 'halted'>('all');
   const [isLogsCleared, setIsLogsCleared] = useState<boolean>(false);
@@ -273,17 +275,24 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barChartData} margin={{ top: 10, right: 10, left: -10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="name" stroke="#64748b" fontSize={10} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke={theme === 'light' ? '#E2E8F0' : '#1e293b'} />
+                <XAxis dataKey="name" stroke={theme === 'light' ? '#64748b' : '#94a3b8'} fontSize={10} tickLine={false} />
                 <YAxis 
-                  stroke="#64748b" 
+                  stroke={theme === 'light' ? '#64748b' : '#94a3b8'} 
                   fontSize={10} 
                   tickLine={false}
                   tickFormatter={(v) => v >= 100000 ? `₹${(v/100000).toFixed(0)}L` : `₹${(v/1000).toFixed(0)}k`}
                 />
                 <Tooltip 
-                  cursor={{ fill: 'rgba(30, 41, 59, 0.4)' }}
-                  contentStyle={{ backgroundColor: '#111b2d', borderColor: '#1e293b', borderRadius: '8px', color: '#fff', fontSize: '11px' }}
+                  cursor={{ fill: theme === 'light' ? 'rgba(200, 220, 252, 0.3)' : 'rgba(30, 41, 59, 0.4)' }}
+                  contentStyle={{ 
+                    backgroundColor: theme === 'light' ? '#FFFFFF' : '#111b2d', 
+                    borderColor: theme === 'light' ? '#C8DCFC' : '#1e293b', 
+                    borderRadius: '8px', 
+                    color: theme === 'light' ? '#1C1C1C' : '#fff', 
+                    fontSize: '11px',
+                    boxShadow: '0 4px 12px rgba(7, 38, 84, 0.1)'
+                  }}
                   formatter={(value) => [formatCurrency(Number(value)), '']}
                 />
                 <Bar dataKey="At Risk" fill="#3b82f6" radius={[4, 4, 0, 0]} maxBarSize={30} />
@@ -316,7 +325,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#111b2d', borderColor: '#1e293b', borderRadius: '8px', color: '#fff', fontSize: '11px' }}
+                    contentStyle={{ 
+                      backgroundColor: theme === 'light' ? '#FFFFFF' : '#111b2d', 
+                      borderColor: theme === 'light' ? '#C8DCFC' : '#1e293b', 
+                      borderRadius: '8px', 
+                      color: theme === 'light' ? '#1C1C1C' : '#fff', 
+                      fontSize: '11px',
+                      boxShadow: '0 4px 12px rgba(7, 38, 84, 0.1)'
+                    }}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -328,7 +344,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             )}
             {statusPieData.length > 0 && (
               <div className="absolute flex flex-col items-center justify-center">
-                <span className="text-xl font-extrabold text-white">
+                <span className={`text-xl font-extrabold ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
                   {metrics.active_cases + metrics.recovered_cases + metrics.failed_cases}
                 </span>
                 <span className="text-[8px] text-gray-400 uppercase font-bold">Total</span>

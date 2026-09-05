@@ -84,6 +84,21 @@ function App() {
     }
   }, []);
 
+  // Synchronize active theme with document element and body
+  useEffect(() => {
+    if (theme === 'light') {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      document.body.classList.add('light');
+      document.body.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    }
+  }, [theme]);
+
   // Fetch full cases list
   const fetchCases = async () => {
     try {
@@ -364,10 +379,10 @@ function App() {
   }, [isStreaming, streamSpeed, selectedCaseId]);
 
   return (
-    <div className={`min-h-screen flex flex-col ${theme}`}>
+    <div className={`min-h-screen flex flex-col bg-brand-dark text-brand-text transition-colors duration-200 ${theme}`}>
       
-      {/* Navigation Header */}
-      <header className="sticky top-0 z-40 bg-brand-surface/95 backdrop-blur border-b border-brand-border px-6 py-3 flex flex-wrap justify-between items-center shadow-lg gap-3">
+      {/* Navigation Header: Iconic Razorpay Deep Navy */}
+      <header className="sticky top-0 z-40 bg-[#072654] border-b border-[#194685] px-6 py-3 flex flex-wrap justify-between items-center shadow-lg gap-3 text-white">
         <div className="flex items-center gap-3">
           <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-2 rounded-xl text-white shadow-md shadow-blue-900/30">
             <ShieldCheck size={22} className="stroke-[2.5]" />
@@ -375,7 +390,7 @@ function App() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-black tracking-tight text-white">AI Revenue Recovery</h1>
-              <span className="bg-[#002e7a] text-[9px] font-bold text-blue-300 border border-[#0047b3] px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="bg-[#002e7a] text-[9px] font-bold text-blue-200 border border-[#0047b3] px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Razorpay Agent
               </span>
               <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded-full">
@@ -383,7 +398,7 @@ function App() {
                 Real-Time Node
               </span>
             </div>
-            <p className="text-[10px] text-gray-400">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
+            <p className="text-[10px] text-blue-200/80">Autonomous Payment Failure & Abandonment Recovery Command Center</p>
           </div>
         </div>
 
@@ -393,7 +408,7 @@ function App() {
           {/* Evaluation Batch Button */}
           <button
             onClick={() => setShowEvalModal(true)}
-            className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md transition-all"
+            className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-white-forced rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
           >
             <PlayCircle size={14} />
             Run Evaluation Batch (200)
@@ -402,30 +417,30 @@ function App() {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-brand-border rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors"
+            className="p-1.5 bg-[#0a316b] hover:bg-[#0c3a7d] text-white border border-[#194685] rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
             title={`Switch to Razorpay ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
           >
             {theme === 'dark' ? (
               <>
                 <Sun size={15} className="text-amber-400" />
-                <span className="hidden sm:inline text-[11px]">Light Mode</span>
+                <span className="hidden sm:inline text-[11px] text-white">Light Mode</span>
               </>
             ) : (
               <>
-                <Moon size={15} className="text-blue-400" />
-                <span className="hidden sm:inline text-[11px]">Dark Mode</span>
+                <Moon size={15} className="text-[#75A3FF]" />
+                <span className="hidden sm:inline text-[11px] text-white">Dark Mode</span>
               </>
             )}
           </button>
 
           {/* Tab Switcher */}
-          <div className="flex bg-slate-900/80 p-1 rounded-xl border border-brand-border text-xs font-semibold shadow-inner">
+          <div className="flex bg-[#0a316b] p-1 rounded-xl border border-[#194685] text-xs font-semibold shadow-inner">
             <button
               onClick={() => setActiveTab('dashboard')}
-              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'dashboard'
-                  ? 'bg-brand-primary text-white shadow-md'
-                  : 'text-gray-400 hover:text-white'
+                  ? 'bg-brand-primary text-white shadow-md text-white-forced'
+                  : 'text-blue-200 hover:text-white'
               }`}
             >
               <BarChart2 size={13} />
@@ -434,10 +449,10 @@ function App() {
             
             <button
               onClick={() => setActiveTab('stream')}
-              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${
                 activeTab === 'stream'
-                  ? 'bg-brand-primary text-white shadow-md'
-                  : 'text-gray-400 hover:text-white'
+                  ? 'bg-brand-primary text-white shadow-md text-white-forced'
+                  : 'text-blue-200 hover:text-white'
               }`}
             >
               <Radio size={13} className={metrics.active_cases > 0 ? 'text-emerald-400 animate-pulse' : ''} />
@@ -476,6 +491,7 @@ function App() {
             onSelectCase={handleSelectCase}
             lastRecoveryAlert={lastRecoveryAlert}
             isStreaming={isStreaming}
+            theme={theme}
           />
         ) : (
           <div className="space-y-6 animate-fadeIn">

@@ -12,86 +12,158 @@
   --color-brand-text: var(--color-text-main);
 }
 
-/* Razorpay Core Palette Variables */
+/* =========================================================
+   RAZORPAY DESIGN TOKENS
+   ========================================================= */
+
+/* Dark Mode Tokens (Default) */
 :root,
+html.dark,
+body.dark,
 .dark {
   --color-bg-base: #072654;
   --color-bg-surface: #0a316b;
   --color-bg-card: #0c3a7d;
+  --color-bg-well: #072654;
   --color-border-main: #194685;
   --color-text-main: #FFFFFF;
   --color-text-sub: #A3C7F7;
   color-scheme: dark;
 }
 
+/* Light Mode Tokens (Official Razorpay Light Palette) */
+html.light,
+body.light,
 .light {
   --color-bg-base: #E6F0FF;
   --color-bg-surface: #FFFFFF;
   --color-bg-card: #FFFFFF;
+  --color-bg-well: #F0F6FF;
   --color-border-main: #C8DCFC;
   --color-text-main: #1C1C1C;
-  --color-text-sub: #556B82;
+  --color-text-sub: #4B5563;
   color-scheme: light;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow-x: hidden;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Dark mode Razorpay palette */
-.dark body {
-  background-color: #072654;
-  color: #FFFFFF;
+/* Ensure canvas background properly follows active theme */
+html.dark, body.dark {
+  background-color: #072654 !important;
+  color: #FFFFFF !important;
 }
 
-/* Light mode overrides with Razorpay official light palette */
-.light body {
-  background-color: #E6F0FF;
-  color: #1C1C1C;
+html.light, body.light {
+  background-color: #E6F0FF !important;
+  color: #1C1C1C !important;
 }
 
+/* =========================================================
+   LIGHT MODE TARGETED COMPONENT STYLES
+   ========================================================= */
+
+/* Canvas background */
 .light .bg-brand-dark {
   background-color: #E6F0FF !important;
 }
 
+/* Cards & Panels: Crisp White with Razorpay Soft Shadow & Border */
 .light .bg-brand-surface {
   background-color: #FFFFFF !important;
-  box-shadow: 0 4px 14px -2px rgba(7, 38, 84, 0.08);
+  border-color: #C8DCFC !important;
+  box-shadow: 0 4px 16px -2px rgba(7, 38, 84, 0.07) !important;
 }
 
-.light .bg-slate-900,
-.light .bg-slate-900\/60,
-.light .bg-slate-900\/80,
-.light .bg-slate-950,
-.light .bg-slate-950\/80 {
+/* Wells & Inner Containers inside Cards */
+.light .bg-brand-surface .bg-brand-dark,
+.light .bg-brand-surface .bg-brand-dark\/80,
+.light .bg-brand-surface .bg-brand-dark\/70,
+.light .bg-brand-surface .bg-brand-dark\/60,
+.light .bg-brand-surface .bg-slate-900,
+.light .bg-brand-surface .bg-slate-900\/80,
+.light .bg-brand-surface .bg-slate-900\/60,
+.light .bg-brand-surface .bg-slate-900\/40 {
   background-color: #F0F6FF !important;
+  border-color: #C8DCFC !important;
 }
 
+/* Live Telemetry Strip in Light Mode */
+.light .bg-slate-950\/80 {
+  background-color: #FFFFFF !important;
+  border-color: #C8DCFC !important;
+}
+
+/* Copilot Insights Banner in Light Mode */
+.light div[class*="from-blue-950"] {
+  background-image: none !important;
+  background-color: #FFFFFF !important;
+  border-color: #C8DCFC !important;
+  box-shadow: 0 4px 16px -2px rgba(7, 38, 84, 0.06) !important;
+}
+
+/* Live Recovery Win Banner in Light Mode */
+.light div[class*="from-emerald-950"] {
+  background-image: none !important;
+  background-color: #ECFDF5 !important;
+  border-color: #6EE7B7 !important;
+}
+.light div[class*="from-emerald-950"] .text-slate-200 {
+  color: #064E3B !important;
+}
+.light div[class*="from-emerald-950"] strong.text-white {
+  color: #064E3B !important;
+}
+
+/* Borders across Light Mode */
 .light .border-brand-border,
 .light .border-brand-border\/40,
 .light .border-brand-border\/60,
 .light .border-slate-800,
+.light .border-slate-800\/80,
 .light .border-slate-900 {
   border-color: #C8DCFC !important;
 }
 
-.light .text-white {
+/* =========================================================
+   TEXT CONTRAST RULES (Targeted & Protected)
+   ========================================================= */
+
+/* Headings and primary text inside Light Cards */
+.light .bg-brand-surface h1:not(header *),
+.light .bg-brand-surface h2:not(header *),
+.light .bg-brand-surface h3:not(header *),
+.light .bg-brand-surface h4:not(header *),
+.light .bg-brand-surface h5:not(header *),
+.light .bg-brand-surface .text-white:not(button, button *, .btn, .btn *, header *, [role="button"], [role="button"] *, .badge-protected) {
   color: #1C1C1C !important;
 }
 
-.light .text-slate-100 {
+.light .bg-brand-dark h1:not(header *),
+.light .bg-brand-dark h2:not(header *),
+.light .bg-brand-dark h3:not(header *),
+.light .bg-brand-dark h4:not(header *),
+.light .bg-brand-dark h5:not(header *),
+.light .bg-brand-dark .text-white:not(button, button *, .btn, .btn *, header *, [role="button"], [role="button"] *, .badge-protected) {
   color: #1C1C1C !important;
 }
 
+/* Secondary & Muted Text in Light Mode */
+.light .text-slate-100,
 .light .text-slate-200 {
-  color: #2D3748 !important;
+  color: #1C1C1C !important;
 }
 
-.light .text-slate-300 {
-  color: #4A5568 !important;
+.light .text-slate-300,
+.light .text-slate-400 {
+  color: #374151 !important;
 }
 
 .light .text-gray-400,
@@ -99,15 +171,85 @@ body {
   color: #556B82 !important;
 }
 
-/* Terminal in light mode */
-.light .bg-slate-950.border-emerald-500\/25,
-.light .bg-slate-950.border-emerald-500\/20 {
-  background-color: #072654 !important;
-  border-color: #3395FF40 !important;
+/* Protect the Header: Always Razorpay Deep Navy with White Text */
+header.bg-\[\#072654\],
+header.bg-\[\#072654\] *,
+.light header.bg-\[\#072654\],
+.light header.bg-\[\#072654\] * {
+  /* Retain bright colors in the header */
 }
-.light .bg-slate-950.border-emerald-500\/25 *,
-.light .bg-slate-950.border-emerald-500\/20 * {
-  color: revert;
+.light header.bg-\[\#072654\] h1 {
+  color: #FFFFFF !important;
+}
+.light header.bg-\[\#072654\] p {
+  color: #C8DCFC !important;
+}
+.light header.bg-\[\#072654\] .text-white {
+  color: #FFFFFF !important;
+}
+
+/* Protect Primary Action Buttons: Always Crisp White Text */
+.light button.bg-brand-primary,
+.light button.bg-brand-primary *,
+.light button.bg-blue-600,
+.light button.bg-blue-600 *,
+.light button.bg-emerald-600,
+.light button.bg-emerald-600 *,
+.light button.bg-amber-600,
+.light button.bg-amber-600 *,
+.light button[class*="from-blue-"],
+.light button[class*="from-blue-"] *,
+.light .text-white-forced {
+  color: #FFFFFF !important;
+}
+
+/* Active Tab Button */
+.light button[class*="bg-brand-primary"].text-white {
+  color: #FFFFFF !important;
+}
+
+/* Quick Ingest Buttons in Light Mode */
+.light .bg-brand-surface button[class*="bg-brand-dark"] {
+  background-color: #FFFFFF !important;
+  border-color: #C8DCFC !important;
+}
+.light .bg-brand-surface button[class*="bg-brand-dark"]:hover {
+  background-color: #F0F6FF !important;
+  border-color: #3395FF !important;
+}
+
+/* Form Controls in Light Mode */
+.light input,
+.light select,
+.light textarea {
+  background-color: #FFFFFF !important;
+  color: #1C1C1C !important;
+  border-color: #C8DCFC !important;
+}
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Terminal: Retain Developer Dark Navy Console */
+.light .bg-slate-950.font-mono,
+.light .bg-slate-950.border-emerald-500\/25 {
+  background-color: #072654 !important;
+  border-color: #194685 !important;
+  box-shadow: 0 8px 24px -4px rgba(7, 38, 84, 0.25) !important;
+}
+.light .bg-slate-950.font-mono *,
+.light .bg-slate-950.border-emerald-500\/25 * {
+  color: revert !important;
+}
+.light .bg-slate-950.font-mono .text-emerald-400 {
+  color: #34D399 !important;
+}
+.light .bg-slate-950.font-mono .text-slate-300 {
+  color: #E2E8F0 !important;
+}
+.light .bg-slate-950.font-mono .text-gray-500 {
+  color: #94A3B8 !important;
 }
 
 /* Custom scrollbars */
