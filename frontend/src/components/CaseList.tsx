@@ -12,6 +12,7 @@ interface CaseListProps {
   onSelectCase: (id: string) => void;
   caseDetail: CaseDetail | null;
   onApplyOverride: (action: string, promiseDate?: string, customMsg?: string) => void;
+  externalTypeFilter?: string;
 }
 
 export const CaseList: React.FC<CaseListProps> = ({
@@ -19,7 +20,8 @@ export const CaseList: React.FC<CaseListProps> = ({
   selectedCaseId,
   onSelectCase,
   caseDetail,
-  onApplyOverride
+  onApplyOverride,
+  externalTypeFilter
 }) => {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
@@ -79,6 +81,13 @@ export const CaseList: React.FC<CaseListProps> = ({
     }
     setIsPlayingAudio(false);
   }, [selectedCaseId]);
+
+  // Sync external filter when triggered by Playbook Mapper
+  useEffect(() => {
+    if (externalTypeFilter !== undefined) {
+      setTypeFilter(externalTypeFilter);
+    }
+  }, [externalTypeFilter]);
 
   // Handle Speech Synthesis for Hinglish Voice Recovery
   const handleToggleVoicePlayback = () => {

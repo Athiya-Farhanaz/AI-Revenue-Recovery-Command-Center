@@ -58,6 +58,9 @@ function App() {
     timestamp: number;
   } | null>(null);
 
+  // Filter linked to Playbook Mapper clicks
+  const [playbookTypeFilter, setPlaybookTypeFilter] = useState<string>('all');
+
   // Evaluation Batch Modal
   const [showEvalModal, setShowEvalModal] = useState<boolean>(false);
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
@@ -284,6 +287,34 @@ function App() {
     setActiveTab('stream');
   };
 
+  const handlePlaybookFilter = (type: string) => {
+    const nextFilter = playbookTypeFilter === type ? 'all' : type;
+    setPlaybookTypeFilter(nextFilter);
+    setActiveTab('stream');
+    
+    if (nextFilter !== 'all') {
+      const matched = cases.find(c => c.type === nextFilter);
+      if (matched) {
+        setSelectedCaseId(matched.id);
+        fetchCaseDetail(matched.id);
+      }
+      setActionToast({
+        title: `🎯 Filtered Playbook: ${nextFilter.toUpperCase()}`,
+        message: `Showing ${nextFilter} failure playbooks in the inspector list.`,
+        type: 'info',
+        timestamp: Date.now()
+      });
+    } else {
+      setActionToast({
+        title: `🎯 Reset Playbook Filter`,
+        message: `Showing all case types in the inspector list.`,
+        type: 'info',
+        timestamp: Date.now()
+      });
+    }
+    setTimeout(() => setActionToast(null), 3500);
+  };
+
   // Run full evaluation batch (200 cases)
   const handleRunEvaluation = async () => {
     setIsEvaluating(true);
@@ -451,6 +482,10 @@ function App() {
             {/* Playbook Node Visualization */}
             <PlaybookFlow 
               selectedCase={cases.find(c => c.id === selectedCaseId) || null} 
+              cases={cases}
+              onSelectCase={handleSelectCase}
+              onFilterPlaybook={handlePlaybookFilter}
+              onInjectWebhook={handleInject}
             />
             
             {/* Interactive Stream feed */}
@@ -460,6 +495,7 @@ function App() {
               onSelectCase={handleSelectCase}
               caseDetail={caseDetail}
               onApplyOverride={handleOverride}
+              externalTypeFilter={playbookTypeFilter}
             />
           </div>
         )}
