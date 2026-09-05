@@ -56,7 +56,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
@@ -87,15 +87,8 @@ html.light, body.light {
   box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05) !important;
 }
 
-/* Wells & Inner Containers inside Cards */
-.light .bg-brand-surface .bg-brand-dark,
-.light .bg-brand-surface .bg-brand-dark\/80,
-.light .bg-brand-surface .bg-brand-dark\/70,
-.light .bg-brand-surface .bg-brand-dark\/60,
-.light .bg-brand-surface .bg-slate-900,
-.light .bg-brand-surface .bg-slate-900\/80,
-.light .bg-brand-surface .bg-slate-900\/60,
-.light .bg-brand-surface .bg-slate-900\/40 {
+/* Wells & Inner Containers inside Cards (Excluding dark mockups & consoles) */
+.light .bg-brand-surface .bg-brand-dark:not(.terminal-console, .terminal-console *, .whatsapp-phone-mock, .whatsapp-phone-mock *, .voice-call-mock, .voice-call-mock *) {
   background-color: #F8FAFC !important;
   border-color: #E2E8F0 !important;
 }
@@ -211,7 +204,14 @@ header *,
 }
 .light .whatsapp-phone-mock .text-slate-100,
 .light .whatsapp-phone-mock .text-slate-200 {
-  color: #E2E8F0 !important;
+  color: #F8FAFC !important;
+}
+.light .whatsapp-phone-mock .bg-\[\#182229\] {
+  background-color: #182229 !important;
+  border-color: #2A3942 !important;
+}
+.light .whatsapp-phone-mock .bg-\[\#005c4b\] {
+  background-color: #005C4B !important;
 }
 .light .voice-call-mock {
   background-color: #020617 !important;

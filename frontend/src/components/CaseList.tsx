@@ -199,19 +199,19 @@ export const CaseList: React.FC<CaseListProps> = ({
                 <div className="flex justify-between items-start">
                   <div>
                     <h5 className="font-bold text-slate-900 dark:text-white text-xs">{c.customer_name}</h5>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono block mt-0.5">
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400 font-mono block mt-0.5">
                       {c.id} • <span className="uppercase text-[#0066FF] dark:text-blue-400 font-semibold">{c.type}</span>
                     </span>
                   </div>
                   <div className="text-right">
                     <span className="font-bold text-slate-900 dark:text-white text-xs font-mono">{formatCurrency(c.amount)}</span>
-                    <span className="text-[10px] text-slate-400 block">Code: {c.failure_code}</span>
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-medium">Code: {c.failure_code}</span>
                   </div>
                 </div>
 
                 <div className="mt-3 flex justify-between items-center border-t border-brand-border/60 pt-2">
                   <div>{getStatusBadge(c.status)}</div>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 font-mono font-medium">
                     Active Step: {c.current_escalation_level}/3
                   </span>
                 </div>
@@ -220,7 +220,7 @@ export const CaseList: React.FC<CaseListProps> = ({
           })}
 
           {filteredCases.length === 0 && (
-            <div className="text-slate-400 text-xs italic text-center py-10">
+            <div className="text-slate-500 dark:text-slate-400 text-xs italic text-center py-10">
               No transactions match your search criteria.
             </div>
           )}
@@ -239,18 +239,18 @@ export const CaseList: React.FC<CaseListProps> = ({
                   <h3 className="text-base font-bold text-slate-900 dark:text-white">{caseDetail.customer_name}</h3>
                   {getStatusBadge(caseDetail.status)}
                 </div>
-                <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
-                  <span><User size={12} className="inline mr-1 text-slate-400" />{caseDetail.id}</span>
-                  <span><Mail size={12} className="inline mr-1 text-slate-400" />{caseDetail.customer_email}</span>
-                  <span><Phone size={12} className="inline mr-1 text-slate-400" />{caseDetail.customer_phone}</span>
+                <div className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400 mt-1 font-mono font-medium">
+                  <span><User size={12} className="inline mr-1 text-slate-500" />{caseDetail.id}</span>
+                  <span><Mail size={12} className="inline mr-1 text-slate-500" />{caseDetail.customer_email}</span>
+                  <span><Phone size={12} className="inline mr-1 text-slate-500" />{caseDetail.customer_phone}</span>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold uppercase block">Value At Risk</span>
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold uppercase block">Value At Risk</span>
                 <span className="text-lg font-bold text-slate-900 dark:text-white font-mono">{formatCurrency(caseDetail.amount)}</span>
                 {caseDetail.discount_offered > 0 && (
-                  <span className="text-xs text-emerald-600 dark:text-emerald-400 block font-semibold">
+                  <span className="text-xs text-emerald-700 dark:text-emerald-400 block font-bold">
                     Net: {formatCurrency(caseDetail.amount - caseDetail.discount_offered)} (Discount Applied)
                   </span>
                 )}
@@ -263,8 +263,8 @@ export const CaseList: React.FC<CaseListProps> = ({
               {/* Audit trail */}
               <div className="md:col-span-7 flex flex-col h-full overflow-hidden pr-2">
                 <div className="mb-2">
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider block">AI Risk Assessment</span>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1 overflow-hidden">
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider block">AI Risk Assessment</span>
+                  <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 mt-1 overflow-hidden">
                     <div 
                       className={`h-1.5 rounded-full ${
                         caseDetail.risk_score > 0.7 
@@ -278,7 +278,7 @@ export const CaseList: React.FC<CaseListProps> = ({
                   </div>
                 </div>
 
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-2 block">
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider mb-2 block">
                   Audit & Dunning Trail ({caseDetail.audit_logs.length} events)
                 </span>
 
@@ -309,13 +309,13 @@ export const CaseList: React.FC<CaseListProps> = ({
                                 : 'bg-slate-400'
                         }`} />
 
-                        <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-semibold mb-0.5">
+                        <div className="flex justify-between text-[10px] text-slate-600 dark:text-slate-400 font-semibold mb-0.5">
                           <span className="uppercase font-bold">{log.action}</span>
                           <span>{new Date(log.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
                         </div>
-                        <p className="leading-relaxed font-medium">{log.message}</p>
+                        <p className="leading-relaxed font-semibold text-slate-800 dark:text-slate-200">{log.message}</p>
                         {log.agent_reasoning && (
-                          <div className="mt-1 bg-white dark:bg-brand-dark/60 border-l-2 border-brand-primary p-1.5 rounded text-[10px] text-slate-600 dark:text-slate-400 leading-snug">
+                          <div className="mt-1.5 bg-blue-50/70 dark:bg-brand-dark/60 border-l-2 border-[#0066FF] p-2 rounded-r text-[10px] text-slate-700 dark:text-slate-300 leading-relaxed font-mono">
                             {log.agent_reasoning}
                           </div>
                         )}
@@ -373,18 +373,20 @@ export const CaseList: React.FC<CaseListProps> = ({
 
                         if (isEmail) {
                           return (
-                            <div key={idx} className="bg-slate-900 border border-brand-border rounded-lg p-2 max-w-[90%] self-start text-white shadow-md">
-                              <span className="text-[7px] text-gray-500 font-mono border-b border-brand-border pb-1 block mb-1 uppercase font-bold">EMAIL OUTREACH</span>
-                              <p className="whitespace-pre-line text-[9px] font-sans font-medium text-slate-200">{interv.details}</p>
+                            <div key={idx} className="bg-[#182229] border border-[#2a3942] rounded-lg p-2 max-w-[90%] self-start text-white shadow-md">
+                              <span className="text-[7px] text-blue-400 font-mono border-b border-[#2a3942] pb-1 block mb-1 uppercase font-bold flex items-center gap-1">
+                                <Mail size={9} /> EMAIL OUTREACH
+                              </span>
+                              <p className="whitespace-pre-line text-[9px] font-sans font-medium text-slate-100 leading-relaxed">{interv.details}</p>
                             </div>
                           );
                         }
 
                         return (
-                          <div key={idx} className="bg-[#1f2c34] rounded-lg p-2 max-w-[90%] self-end text-slate-200 shadow relative">
-                            <span className="text-[6px] text-emerald-400 font-bold block uppercase tracking-wider mb-0.5">{interv.type} nudge</span>
-                            <p className="font-sans leading-relaxed text-[10px]">{interv.details}</p>
-                            <span className="text-[7px] text-gray-500 block text-right mt-1">
+                          <div key={idx} className="bg-[#005c4b] rounded-lg p-2 max-w-[90%] self-end text-white shadow relative">
+                            <span className="text-[6px] text-emerald-300 font-bold block uppercase tracking-wider mb-0.5">{interv.type} nudge</span>
+                            <p className="font-sans leading-relaxed text-[10px] text-white">{interv.details}</p>
+                            <span className="text-[7px] text-emerald-200/80 block text-right mt-1 font-mono">
                               {new Date(interv.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })} ✓✓
                             </span>
                           </div>
