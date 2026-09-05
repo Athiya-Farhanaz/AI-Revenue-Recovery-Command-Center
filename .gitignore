@@ -38,3 +38,7 @@ frontend/dist/
 Thumbs.db
 .vscode/
 .idea/
+
+# Video Build scratch
+video_build/
+
