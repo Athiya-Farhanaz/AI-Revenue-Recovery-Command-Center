@@ -1,0 +1,40 @@
+﻿# Environment variables & Secrets
+.env
+*.env
+backend/.env
+frontend/.env
+*.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+backend/**/__pycache__/
+backend/app/__pycache__/
+backend/app/agent/__pycache__/
+backend/tests/__pycache__/
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# SQLite Database files
+*.db
+*.sqlite
+*.sqlite3
+backend/revenue_recovery.db
+
+# Frontend / Node
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

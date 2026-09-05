@@ -1,0 +1,23 @@
+{
+  "total_cases_in_batch": 203,
+  "total_revenue_at_risk": 11737243.0,
+  "total_revenue_recovered": 8385424.0,
+  "recovery_rate_pct": 71.44,
+  "total_intervention_cost": 194437.53,
+  "cost_breakdown": {
+    "direct_messaging_cost": 684.05,
+    "ai_processing_fee": 3045.0,
+    "discount_coupons_cost": 23000.0,
+    "gateway_mdr_fee": 167708.48,
+    "total_cost": 194437.53
+  },
+  "net_roi_pct": 4212.66,
+  "net_roi_multiplier": 43.13,
+  "unrecovered_cases_count": 66,
+  "unrecovered_breakdown": {
+    "fraud_flagged_halted": 1,
+    "max_retries_exhausted": 58,
+    "promise_to_pay_broken": 7,
+    "ignored_outreach_expires": 0
+  }
+}
