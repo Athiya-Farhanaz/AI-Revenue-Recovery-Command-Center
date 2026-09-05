@@ -300,10 +300,16 @@ def inject_batch(req: SimulationInjectRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid batch type")
     
     count_created = generate_random_cases(db, req.batch_type, req.count)
+    latest_case = db.query(Case).order_by(Case.created_at.desc()).first()
     return {
         "status": "success",
         "message": f"Successfully injected {count_created} {req.batch_type} cases.",
-        "count": count_created
+        "count": count_created,
+        "latest_case_id": latest_case.id if latest_case else None,
+        "latest_customer_name": latest_case.customer_name if latest_case else None,
+        "latest_amount": latest_case.amount if latest_case else 0.0,
+        "latest_type": latest_case.type if latest_case else req.batch_type,
+        "latest_failure_reason": latest_case.failure_reason if latest_case else ""
     }
 
 @app.post("/api/simulation/tick")

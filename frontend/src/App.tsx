@@ -50,6 +50,14 @@ function App() {
     timestamp: number;
   } | null>(null);
 
+  // Live action feedback toast
+  const [actionToast, setActionToast] = useState<{
+    title: string;
+    message: string;
+    type: 'info' | 'success' | 'warning';
+    timestamp: number;
+  } | null>(null);
+
   // Evaluation Batch Modal
   const [showEvalModal, setShowEvalModal] = useState<boolean>(false);
   const [isEvaluating, setIsEvaluating] = useState<boolean>(false);
@@ -180,10 +188,30 @@ function App() {
         body: JSON.stringify({ batch_type: batchType, count }),
       });
       if (res.ok) {
+        const data = await res.json();
         await handleStreamStep(2, false);
         await fetchCases();
         await fetchMetrics();
         await fetchGlobalLogs();
+
+        // Switch to Case Inspector so the user immediately sees the injected failure
+        setActiveTab('stream');
+
+        // Auto-select the newly injected case
+        if (data.latest_case_id) {
+          setSelectedCaseId(data.latest_case_id);
+          fetchCaseDetail(data.latest_case_id);
+        }
+
+        setActionToast({
+          title: `⚡ Webhook Ingested: +${count} ${batchType.toUpperCase()}`,
+          message: data.latest_customer_name
+            ? `Customer: ${data.latest_customer_name} (₹${data.latest_amount?.toLocaleString('en-IN')}) — Opened in Case Inspector!`
+            : data.message,
+          type: 'info',
+          timestamp: Date.now()
+        });
+        setTimeout(() => setActionToast(null), 4500);
       }
     } catch (e) {
       console.error('Error injecting batch:', e);
@@ -194,6 +222,13 @@ function App() {
   const handleTick = async (seconds: number) => {
     await handleStreamStep(seconds, false);
     await fetchCases();
+    setActionToast({
+      title: `⏩ Stepped Virtual Time (+${seconds}s)`,
+      message: `Clock advanced by ${seconds} virtual seconds. Due dunning playbooks executed.`,
+      type: 'success',
+      timestamp: Date.now()
+    });
+    setTimeout(() => setActionToast(null), 3000);
   };
 
   // Reset Database
@@ -511,6 +546,27 @@ function App() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Floating Action Feedback Toast */}
+      {actionToast && (
+        <div className="fixed bottom-14 right-6 z-50 bg-[#072654] border-2 border-[#3395FF] text-white p-4 rounded-xl shadow-2xl flex items-start gap-3 animate-fadeIn max-w-md backdrop-blur-md">
+          <div className="w-8 h-8 rounded-lg bg-[#3395FF]/20 border border-[#3395FF] flex items-center justify-center text-[#3395FF] shrink-0 text-base font-bold shadow-sm">
+            ⚡
+          </div>
+          <div className="flex-1">
+            <div className="font-bold text-xs text-[#75A3FF] flex items-center justify-between">
+              <span>{actionToast.title}</span>
+              <button 
+                onClick={() => setActionToast(null)} 
+                className="text-slate-400 hover:text-white text-xs ml-2 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="text-xs text-slate-200 mt-1 leading-snug">{actionToast.message}</div>
           </div>
         </div>
       )}

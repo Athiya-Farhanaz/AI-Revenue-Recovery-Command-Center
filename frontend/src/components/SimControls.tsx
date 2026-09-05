@@ -136,16 +136,17 @@ export const SimControls: React.FC<SimControlsProps> = ({
           </button>
 
           {/* Speed Selector */}
-          <div className="flex bg-brand-dark p-0.5 rounded-lg border border-brand-border text-[11px] font-semibold">
+          <div className="flex bg-brand-dark p-0.5 rounded-lg border border-brand-border text-[11px] font-semibold" title="Simulation Speed: controls how fast virtual time advances in auto-stream">
             {[1, 2, 5].map((speed) => (
               <button
                 key={speed}
                 onClick={() => onChangeSpeed(speed)}
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-2 py-1 rounded transition-all cursor-pointer active:scale-95 ${
                   streamSpeed === speed 
-                    ? 'bg-brand-primary text-white font-bold' 
+                    ? 'bg-brand-primary text-white font-bold shadow-sm' 
                     : 'text-gray-400 hover:text-white'
                 }`}
+                title={`${speed}x Simulation Pace (${speed * 5}s virtual time advanced per tick)`}
               >
                 {speed}x
               </button>
@@ -157,7 +158,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
             <select
               value={tickSeconds}
               onChange={(e) => setTickSeconds(Number(e.target.value))}
-              className="bg-brand-dark border border-brand-border text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px]"
+              className="bg-brand-dark border border-brand-border text-slate-300 text-xs rounded-l-lg py-1.5 px-2 focus:outline-none h-[31px] cursor-pointer"
+              title="Select virtual time duration to advance"
             >
               <option value={5}>+5s</option>
               <option value={15}>+15s</option>
@@ -166,8 +168,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
             </select>
             <button
               onClick={() => onTick(tickSeconds)}
-              className="bg-slate-800 hover:bg-slate-700 text-slate-200 border-y border-r border-brand-border px-2.5 py-1.5 rounded-r-lg text-xs font-semibold flex items-center h-[31px]"
-              title="Step forward manually"
+              className="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 border-y border-r border-brand-border px-2.5 py-1.5 rounded-r-lg text-xs font-semibold flex items-center h-[31px] cursor-pointer transition-all"
+              title="Advance virtual clock forward by selected seconds to trigger due dunning actions"
             >
               <FastForward size={13} className="mr-1" />
               Step
@@ -181,8 +183,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
                 onReset();
               }
             }}
-            className="p-1.5 bg-red-950/30 text-red-400 hover:bg-red-600 hover:text-white rounded-lg border border-red-900/40 transition-colors"
-            title="Reset Simulation & Data"
+            className="p-1.5 bg-red-950/30 text-red-400 hover:bg-red-600 hover:text-white active:scale-95 rounded-lg border border-red-900/40 transition-all cursor-pointer"
+            title="Reset Simulation Clock & Re-seed Demo Cases"
           >
             <Trash2 size={15} />
           </button>
@@ -199,8 +201,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
         <div className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => onInject('payment', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-blue-950/40 text-blue-300 border border-blue-900/40 hover:border-blue-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all"
-            title="Inject UPI / ATM PIN Failure"
+            className="px-2.5 py-1 bg-brand-dark hover:bg-blue-950/60 active:scale-95 text-blue-300 border border-blue-900/40 hover:border-blue-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Ingest UPI PIN failure -> Dispatches WhatsApp Hinglish Recovery"
           >
             <CreditCard size={12} className="text-blue-400" />
             + UPI PIN Fail
@@ -208,8 +210,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('checkout', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-emerald-950/40 text-emerald-300 border border-emerald-900/40 hover:border-emerald-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all"
-            title="Inject Abandoned Cart Checkout Drop"
+            className="px-2.5 py-1 bg-brand-dark hover:bg-emerald-950/60 active:scale-95 text-emerald-300 border border-emerald-900/40 hover:border-emerald-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Ingest checkout abandonment -> Dispatches Margin-Aware Discount Voucher"
           >
             <ShoppingBag size={12} className="text-emerald-400" />
             + Cart Drop
@@ -217,8 +219,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('subscription', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-violet-950/40 text-violet-300 border border-violet-900/40 hover:border-violet-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all"
-            title="Inject Subscription Mandate Soft Decline"
+            className="px-2.5 py-1 bg-brand-dark hover:bg-violet-950/60 active:scale-95 text-violet-300 border border-violet-900/40 hover:border-violet-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Ingest recurring mandate decline -> Dispatches Mandate Retry Sequencer"
           >
             <Layers size={12} className="text-violet-400" />
             + Mandate Decline
@@ -226,8 +228,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('invoice', 1)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-amber-950/40 text-amber-300 border border-amber-900/40 hover:border-amber-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all"
-            title="Inject B2B Net-30 Invoice Past Due"
+            className="px-2.5 py-1 bg-brand-dark hover:bg-amber-950/60 active:scale-95 text-amber-300 border border-amber-900/40 hover:border-amber-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Ingest overdue B2B invoice -> Dispatches 3-Tier Tone Escalation"
           >
             <FileText size={12} className="text-amber-400" />
             + B2B Invoice Overdue
@@ -235,8 +237,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('payment', 5)}
-            className="px-2.5 py-1 bg-brand-dark hover:bg-red-950/40 text-red-300 border border-red-900/40 hover:border-red-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all"
-            title="Inject Mixed Failure Cluster"
+            className="px-2.5 py-1 bg-brand-dark hover:bg-red-950/60 active:scale-95 text-red-300 border border-red-900/40 hover:border-red-500/50 rounded-md text-[11px] font-medium flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Simulate sudden traffic spike: Ingest 5 mixed failure webhooks"
           >
             <ShieldAlert size={12} className="text-red-400" />
             + 5 Mixed Webhooks
@@ -244,8 +246,8 @@ export const SimControls: React.FC<SimControlsProps> = ({
 
           <button
             onClick={() => onInject('mixed', 10)}
-            className="px-2.5 py-1 bg-brand-primary/20 hover:bg-brand-primary/40 text-blue-200 border border-brand-primary/40 hover:border-brand-primary rounded-md text-[11px] font-bold flex items-center gap-1 transition-all"
-            title="Inject 10 Mixed Batch"
+            className="px-2.5 py-1 bg-brand-primary/20 hover:bg-brand-primary/40 active:scale-95 text-blue-200 border border-brand-primary/40 hover:border-brand-primary rounded-md text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer shadow-sm"
+            title="Inject batch of 10 mixed failure events"
           >
             <Zap size={12} className="text-brand-primary" />
             + Batch (10)
